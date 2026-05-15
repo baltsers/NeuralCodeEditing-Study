@@ -1,0 +1,63 @@
+[2021-06-13 19:19:10,450 INFO]  * src vocab size = 10004
+[2021-06-13 19:19:10,450 INFO]  * tgt vocab size = 10004
+[2021-06-13 19:19:10,450 INFO] Building model...
+[2021-06-13 19:19:13,771 INFO] NMTModel(
+  (encoder): RNNEncoder(
+    (embeddings): Embeddings(
+      (make_embedding): Sequential(
+        (emb_luts): Elementwise(
+          (0): Embedding(10004, 256, padding_idx=1)
+        )
+      )
+    )
+    (rnn): LSTM(256, 128, num_layers=2, dropout=0.3, bidirectional=True)
+    (bridge): ModuleList(
+      (0): Linear(in_features=256, out_features=256, bias=True)
+      (1): Linear(in_features=256, out_features=256, bias=True)
+    )
+  )
+  (decoder): InputFeedRNNDecoder(
+    (embeddings): Embeddings(
+      (make_embedding): Sequential(
+        (emb_luts): Elementwise(
+          (0): Embedding(10004, 256, padding_idx=1)
+        )
+      )
+    )
+    (dropout): Dropout(p=0.3, inplace=False)
+    (rnn): StackedLSTM(
+      (dropout): Dropout(p=0.3, inplace=False)
+      (layers): ModuleList(
+        (0): LSTMCell(512, 256)
+        (1): LSTMCell(256, 256)
+      )
+    )
+    (attn): GlobalAttention(
+      (linear_in): Linear(in_features=256, out_features=256, bias=False)
+      (linear_out): Linear(in_features=512, out_features=256, bias=False)
+    )
+  )
+  (generator): CopyGenerator(
+    (linear): Linear(in_features=256, out_features=10004, bias=True)
+    (linear_copy): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+[2021-06-13 19:19:13,772 INFO] encoder: 3483136
+[2021-06-13 19:19:13,772 INFO] decoder: 6643733
+[2021-06-13 19:19:13,772 INFO] * number of parameters: 10126869
+[2021-06-13 19:19:13,774 INFO] Starting training on GPU: [0]
+[2021-06-13 19:19:13,774 INFO] Start training loop and validate every 10000 steps...
+[2021-06-13 19:19:13,774 INFO] Loading dataset from /root/Sequencer/chai/bigvul_holdout/final.train.0.pt
+[2021-06-13 19:19:18,336 INFO] number of examples: 1402
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/iterator.py:48: UserWarning: OrderedIterator class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/batch.py:23: UserWarning: Batch class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/field.py:356: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  var = torch.tensor(arr, dtype=self.dtype, device=device)
+[2021-06-13 19:19:18,659 INFO] iter: 0
+[2021-06-13 19:19:46,447 INFO] iter: 1
+[2021-06-13 19:20:07,240 INFO] iter: 2
+[2021-06-13 19:20:19,002 INFO] iter: 3
+[2021-06-13 19:20:23,568 INFO] iter: 4
+[2021-06-13 19:20:29,728 INFO] iter: 5

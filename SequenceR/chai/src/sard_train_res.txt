@@ -1,0 +1,474 @@
+(sequencer) root@4dd4d0b94873:~/Sequencer/chai/src# bash sequencer-train.sh
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/full_sard/final.train*.pt, to avoid overwriting them!
+Starting training
+[2021-06-11 14:15:22,380 INFO]  * src vocab size = 2460
+[2021-06-11 14:15:22,380 INFO]  * tgt vocab size = 2460
+[2021-06-11 14:15:22,380 INFO] Building model...
+[2021-06-11 14:15:23,672 INFO] NMTModel(
+  (encoder): RNNEncoder(
+    (embeddings): Embeddings(
+      (make_embedding): Sequential(
+        (emb_luts): Elementwise(
+          (0): Embedding(2460, 256, padding_idx=1)
+        )
+      )
+    )
+    (rnn): LSTM(256, 128, num_layers=2, dropout=0.3, bidirectional=True)
+    (bridge): ModuleList(
+      (0): Linear(in_features=256, out_features=256, bias=True)
+      (1): Linear(in_features=256, out_features=256, bias=True)
+    )
+  )
+  (decoder): InputFeedRNNDecoder(
+    (embeddings): Embeddings(
+      (make_embedding): Sequential(
+        (emb_luts): Elementwise(
+          (0): Embedding(2460, 256, padding_idx=1)
+        )
+      )
+    )
+    (dropout): Dropout(p=0.3, inplace=False)
+    (rnn): StackedLSTM(
+      (dropout): Dropout(p=0.3, inplace=False)
+      (layers): ModuleList(
+        (0): LSTMCell(512, 256)
+        (1): LSTMCell(256, 256)
+      )
+    )
+    (attn): GlobalAttention(
+      (linear_in): Linear(in_features=256, out_features=256, bias=False)
+      (linear_out): Linear(in_features=512, out_features=256, bias=False)
+    )
+  )
+  (generator): CopyGenerator(
+    (linear): Linear(in_features=256, out_features=2460, bias=True)
+    (linear_copy): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+[2021-06-11 14:15:23,672 INFO] encoder: 1551872
+[2021-06-11 14:15:23,672 INFO] decoder: 2773661
+[2021-06-11 14:15:23,672 INFO] * number of parameters: 4325533
+[2021-06-11 14:15:23,673 INFO] Starting training on GPU: [0]
+[2021-06-11 14:15:23,673 INFO] Start training loop and validate every 10000 steps...
+[2021-06-11 14:15:23,673 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 14:15:28,668 INFO] number of examples: 31041
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/iterator.py:48: UserWarning: OrderedIterator class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/batch.py:23: UserWarning: Batch class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/field.py:356: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  var = torch.tensor(arr, dtype=self.dtype, device=device)
+[2021-06-11 14:15:47,526 INFO] Step 50/20000; acc:   9.61; ppl: 476.28; xent: 6.17; lr: 1.00000; 10680/11133 tok/s;     24 sec
+[2021-06-11 14:16:03,175 INFO] Step 100/20000; acc:  11.20; ppl: 154.31; xent: 5.04; lr: 1.00000; 14007/14885 tok/s;     40 sec
+[2021-06-11 14:16:17,477 INFO] Step 150/20000; acc:  10.90; ppl: 45.15; xent: 3.81; lr: 1.00000; 16020/16467 tok/s;     54 sec
+[2021-06-11 14:16:32,554 INFO] Step 200/20000; acc:  11.79; ppl: 47.08; xent: 3.85; lr: 1.00000; 15783/16376 tok/s;     69 sec
+[2021-06-11 14:16:48,802 INFO] Step 250/20000; acc:  12.38; ppl: 45.51; xent: 3.82; lr: 1.00000; 14482/15429 tok/s;     85 sec
+[2021-06-11 14:17:06,484 INFO] Step 300/20000; acc:  17.45; ppl: 50.04; xent: 3.91; lr: 1.00000; 13880/15622 tok/s;    103 sec
+[2021-06-11 14:17:19,753 INFO] Step 350/20000; acc:  28.84; ppl: 20.37; xent: 3.01; lr: 1.00000; 16872/17837 tok/s;    116 sec
+[2021-06-11 14:17:34,523 INFO] Step 400/20000; acc:  42.89; ppl:  8.30; xent: 2.12; lr: 1.00000; 16244/16955 tok/s;    131 sec
+[2021-06-11 14:17:51,001 INFO] Step 450/20000; acc:  56.38; ppl:  5.98; xent: 1.79; lr: 1.00000; 15017/15853 tok/s;    147 sec
+[2021-06-11 14:18:04,056 INFO] Step 500/20000; acc:  69.28; ppl:  4.64; xent: 1.53; lr: 1.00000; 16369/17853 tok/s;    160 sec
+[2021-06-11 14:18:20,857 INFO] Step 550/20000; acc:  74.16; ppl:  3.04; xent: 1.11; lr: 1.00000; 15936/15639 tok/s;    177 sec
+[2021-06-11 14:18:35,802 INFO] Step 600/20000; acc:  81.20; ppl:  2.47; xent: 0.91; lr: 1.00000; 14346/15240 tok/s;    192 sec
+[2021-06-11 14:18:50,397 INFO] Step 650/20000; acc:  83.29; ppl:  2.27; xent: 0.82; lr: 1.00000; 15157/16029 tok/s;    207 sec
+[2021-06-11 14:19:07,262 INFO] Step 700/20000; acc:  85.30; ppl:  1.88; xent: 0.63; lr: 1.00000; 15337/15575 tok/s;    224 sec
+[2021-06-11 14:19:19,440 INFO] Step 750/20000; acc:  87.02; ppl:  2.00; xent: 0.69; lr: 1.00000; 16824/17464 tok/s;    236 sec
+[2021-06-11 14:19:34,084 INFO] Step 800/20000; acc:  88.19; ppl:  1.81; xent: 0.59; lr: 1.00000; 15573/16683 tok/s;    250 sec
+[2021-06-11 14:19:49,297 INFO] Step 850/20000; acc:  88.21; ppl:  1.74; xent: 0.56; lr: 1.00000; 16202/16650 tok/s;    266 sec
+[2021-06-11 14:20:01,679 INFO] Step 900/20000; acc:  91.29; ppl:  1.56; xent: 0.45; lr: 1.00000; 16658/17339 tok/s;    278 sec
+[2021-06-11 14:20:18,242 INFO] Step 950/20000; acc:  88.50; ppl:  1.74; xent: 0.55; lr: 1.00000; 15084/15621 tok/s;    295 sec
+[2021-06-11 14:20:24,926 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 14:20:30,430 INFO] number of examples: 31041
+[2021-06-11 14:20:42,194 INFO] Step 1000/20000; acc:  91.19; ppl:  1.51; xent: 0.41; lr: 1.00000; 10834/11218 tok/s;    319 sec
+[2021-06-11 14:20:42,203 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_1000.pt
+[2021-06-11 14:20:59,337 INFO] Step 1050/20000; acc:  92.15; ppl:  1.43; xent: 0.36; lr: 1.00000; 13991/14748 tok/s;    336 sec
+[2021-06-11 14:21:12,381 INFO] Step 1100/20000; acc:  94.95; ppl:  1.23; xent: 0.21; lr: 1.00000; 16001/16584 tok/s;    349 sec
+[2021-06-11 14:21:25,710 INFO] Step 1150/20000; acc:  95.82; ppl:  1.20; xent: 0.18; lr: 1.00000; 16976/17226 tok/s;    362 sec
+[2021-06-11 14:21:42,691 INFO] Step 1200/20000; acc:  92.61; ppl:  1.40; xent: 0.33; lr: 1.00000; 14193/15127 tok/s;    379 sec
+[2021-06-11 14:22:00,665 INFO] Step 1250/20000; acc:  90.87; ppl:  1.89; xent: 0.63; lr: 1.00000; 14753/16223 tok/s;    397 sec
+[2021-06-11 14:22:16,199 INFO] Step 1300/20000; acc:  93.69; ppl:  1.40; xent: 0.34; lr: 1.00000; 14826/16282 tok/s;    413 sec
+[2021-06-11 14:22:29,674 INFO] Step 1350/20000; acc:  94.43; ppl:  1.32; xent: 0.28; lr: 1.00000; 15816/17035 tok/s;    426 sec
+[2021-06-11 14:22:45,248 INFO] Step 1400/20000; acc:  95.67; ppl:  1.24; xent: 0.22; lr: 1.00000; 15782/16538 tok/s;    442 sec
+[2021-06-11 14:22:57,778 INFO] Step 1450/20000; acc:  96.93; ppl:  1.16; xent: 0.15; lr: 1.00000; 16820/17166 tok/s;    454 sec
+[2021-06-11 14:23:14,160 INFO] Step 1500/20000; acc:  95.78; ppl:  1.22; xent: 0.20; lr: 1.00000; 15176/16610 tok/s;    470 sec
+[2021-06-11 14:23:30,484 INFO] Step 1550/20000; acc:  95.82; ppl:  1.23; xent: 0.20; lr: 1.00000; 15061/14728 tok/s;    487 sec
+[2021-06-11 14:23:44,742 INFO] Step 1600/20000; acc:  96.26; ppl:  1.20; xent: 0.19; lr: 1.00000; 14675/15637 tok/s;    501 sec
+[2021-06-11 14:24:02,202 INFO] Step 1650/20000; acc:  96.71; ppl:  1.17; xent: 0.16; lr: 1.00000; 14933/15535 tok/s;    519 sec
+[2021-06-11 14:24:15,241 INFO] Step 1700/20000; acc:  98.27; ppl:  1.09; xent: 0.08; lr: 1.00000; 16952/16774 tok/s;    532 sec
+[2021-06-11 14:24:29,504 INFO] Step 1750/20000; acc:  96.96; ppl:  1.16; xent: 0.15; lr: 1.00000; 15906/16846 tok/s;    546 sec
+[2021-06-11 14:24:44,014 INFO] Step 1800/20000; acc:  97.38; ppl:  1.13; xent: 0.12; lr: 1.00000; 16095/16662 tok/s;    560 sec
+[2021-06-11 14:24:57,478 INFO] Step 1850/20000; acc:  97.62; ppl:  1.12; xent: 0.11; lr: 1.00000; 16131/16828 tok/s;    574 sec
+[2021-06-11 14:25:12,009 INFO] Step 1900/20000; acc:  95.85; ppl:  1.23; xent: 0.21; lr: 1.00000; 15722/17071 tok/s;    588 sec
+[2021-06-11 14:25:26,562 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 14:25:32,182 INFO] number of examples: 31041
+[2021-06-11 14:25:35,490 INFO] Step 1950/20000; acc:  97.32; ppl:  1.12; xent: 0.12; lr: 1.00000; 10921/10986 tok/s;    612 sec
+[2021-06-11 14:25:53,881 INFO] Step 2000/20000; acc:  96.48; ppl:  1.17; xent: 0.15; lr: 1.00000; 13572/14191 tok/s;    630 sec
+[2021-06-11 14:25:53,888 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_2000.pt
+[2021-06-11 14:26:09,924 INFO] Step 2050/20000; acc:  97.88; ppl:  1.10; xent: 0.09; lr: 1.00000; 13687/14760 tok/s;    646 sec
+[2021-06-11 14:26:24,964 INFO] Step 2100/20000; acc:  98.35; ppl:  1.08; xent: 0.07; lr: 1.00000; 15717/15963 tok/s;    661 sec
+[2021-06-11 14:26:40,382 INFO] Step 2150/20000; acc:  97.20; ppl:  1.15; xent: 0.14; lr: 1.00000; 14902/15663 tok/s;    677 sec
+[2021-06-11 14:26:56,164 INFO] Step 2200/20000; acc:  96.97; ppl:  1.16; xent: 0.15; lr: 1.00000; 14680/15785 tok/s;    692 sec
+[2021-06-11 14:27:14,691 INFO] Step 2250/20000; acc:  93.15; ppl:  1.57; xent: 0.45; lr: 1.00000; 13616/15061 tok/s;    711 sec
+[2021-06-11 14:27:27,847 INFO] Step 2300/20000; acc:  96.85; ppl:  1.19; xent: 0.18; lr: 1.00000; 17027/17895 tok/s;    724 sec
+[2021-06-11 14:27:42,533 INFO] Step 2350/20000; acc:  97.66; ppl:  1.12; xent: 0.11; lr: 1.00000; 15845/16959 tok/s;    739 sec
+[2021-06-11 14:27:58,992 INFO] Step 2400/20000; acc:  97.69; ppl:  1.13; xent: 0.12; lr: 1.00000; 15181/15534 tok/s;    755 sec
+[2021-06-11 14:28:13,743 INFO] Step 2450/20000; acc:  97.98; ppl:  1.10; xent: 0.10; lr: 1.00000; 15340/16991 tok/s;    770 sec
+[2021-06-11 14:28:30,606 INFO] Step 2500/20000; acc:  97.76; ppl:  1.12; xent: 0.12; lr: 1.00000; 14918/14452 tok/s;    787 sec
+[2021-06-11 14:28:45,023 INFO] Step 2550/20000; acc:  97.67; ppl:  1.13; xent: 0.12; lr: 1.00000; 14546/15435 tok/s;    801 sec
+[2021-06-11 14:29:00,918 INFO] Step 2600/20000; acc:  97.87; ppl:  1.10; xent: 0.10; lr: 1.00000; 14210/15234 tok/s;    817 sec
+[2021-06-11 14:29:18,200 INFO] Step 2650/20000; acc:  98.97; ppl:  1.05; xent: 0.05; lr: 1.00000; 14783/14765 tok/s;    835 sec
+[2021-06-11 14:29:31,724 INFO] Step 2700/20000; acc:  98.17; ppl:  1.10; xent: 0.09; lr: 1.00000; 16168/16636 tok/s;    848 sec
+[2021-06-11 14:29:46,445 INFO] Step 2750/20000; acc:  98.41; ppl:  1.08; xent: 0.08; lr: 1.00000; 14638/15832 tok/s;    863 sec
+[2021-06-11 14:30:02,669 INFO] Step 2800/20000; acc:  98.50; ppl:  1.07; xent: 0.07; lr: 1.00000; 15602/15975 tok/s;    879 sec
+[2021-06-11 14:30:16,966 INFO] Step 2850/20000; acc:  97.81; ppl:  1.13; xent: 0.12; lr: 1.00000; 15194/16205 tok/s;    893 sec
+[2021-06-11 14:30:34,088 INFO] Step 2900/20000; acc:  97.60; ppl:  1.12; xent: 0.12; lr: 1.00000; 14794/15185 tok/s;    910 sec
+[2021-06-11 14:30:37,461 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 14:30:43,854 INFO] number of examples: 31041
+[2021-06-11 14:30:59,050 INFO] Step 2950/20000; acc:  98.02; ppl:  1.09; xent: 0.09; lr: 1.00000; 10454/10423 tok/s;    935 sec
+[2021-06-11 14:31:15,107 INFO] Step 3000/20000; acc:  98.33; ppl:  1.08; xent: 0.07; lr: 1.00000; 13504/14701 tok/s;    951 sec
+[2021-06-11 14:31:15,118 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_3000.pt
+[2021-06-11 14:31:29,954 INFO] Step 3050/20000; acc:  98.74; ppl:  1.06; xent: 0.06; lr: 1.00000; 14938/15939 tok/s;    966 sec
+[2021-06-11 14:31:44,195 INFO] Step 3100/20000; acc:  98.60; ppl:  1.07; xent: 0.07; lr: 1.00000; 16197/16187 tok/s;    981 sec
+[2021-06-11 14:32:01,560 INFO] Step 3150/20000; acc:  97.86; ppl:  1.11; xent: 0.11; lr: 1.00000; 13663/15030 tok/s;    998 sec
+[2021-06-11 14:32:19,117 INFO] Step 3200/20000; acc:  93.67; ppl:  1.57; xent: 0.45; lr: 1.00000; 14757/15834 tok/s;   1015 sec
+[2021-06-11 14:32:33,760 INFO] Step 3250/20000; acc:  97.76; ppl:  1.13; xent: 0.12; lr: 1.00000; 15006/16318 tok/s;   1030 sec
+[2021-06-11 14:32:48,848 INFO] Step 3300/20000; acc:  97.80; ppl:  1.11; xent: 0.11; lr: 1.00000; 15720/16740 tok/s;   1045 sec
+[2021-06-11 14:33:05,537 INFO] Step 3350/20000; acc:  98.01; ppl:  1.12; xent: 0.11; lr: 1.00000; 14403/15231 tok/s;   1062 sec
+[2021-06-11 14:33:17,506 INFO] Step 3400/20000; acc:  98.69; ppl:  1.07; xent: 0.07; lr: 1.00000; 16618/17582 tok/s;   1074 sec
+[2021-06-11 14:33:33,854 INFO] Step 3450/20000; acc:  98.45; ppl:  1.07; xent: 0.07; lr: 1.00000; 15149/16058 tok/s;   1090 sec
+[2021-06-11 14:33:51,166 INFO] Step 3500/20000; acc:  98.12; ppl:  1.11; xent: 0.10; lr: 1.00000; 14575/14344 tok/s;   1107 sec
+[2021-06-11 14:34:06,355 INFO] Step 3550/20000; acc:  98.41; ppl:  1.08; xent: 0.08; lr: 1.00000; 13766/15051 tok/s;   1123 sec
+[2021-06-11 14:34:23,677 INFO] Step 3600/20000; acc:  98.82; ppl:  1.06; xent: 0.06; lr: 1.00000; 14765/14967 tok/s;   1140 sec
+[2021-06-11 14:34:37,771 INFO] Step 3650/20000; acc:  98.96; ppl:  1.05; xent: 0.05; lr: 1.00000; 15917/16213 tok/s;   1154 sec
+[2021-06-11 14:34:52,504 INFO] Step 3700/20000; acc:  98.39; ppl:  1.09; xent: 0.08; lr: 1.00000; 15235/16123 tok/s;   1169 sec
+[2021-06-11 14:35:07,801 INFO] Step 3750/20000; acc:  98.76; ppl:  1.06; xent: 0.06; lr: 1.00000; 15413/16126 tok/s;   1184 sec
+[2021-06-11 14:35:21,499 INFO] Step 3800/20000; acc:  98.79; ppl:  1.06; xent: 0.06; lr: 1.00000; 16087/16300 tok/s;   1198 sec
+[2021-06-11 14:35:36,424 INFO] Step 3850/20000; acc:  97.77; ppl:  1.15; xent: 0.14; lr: 1.00000; 14730/15761 tok/s;   1213 sec
+[2021-06-11 14:35:48,936 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 14:35:54,880 INFO] number of examples: 31041
+[2021-06-11 14:36:01,265 INFO] Step 3900/20000; acc:  98.57; ppl:  1.07; xent: 0.06; lr: 1.00000; 10899/11173 tok/s;   1238 sec
+[2021-06-11 14:36:20,193 INFO] Step 3950/20000; acc:  98.01; ppl:  1.09; xent: 0.09; lr: 1.00000; 12978/13695 tok/s;   1257 sec
+[2021-06-11 14:36:35,478 INFO] Step 4000/20000; acc:  98.87; ppl:  1.06; xent: 0.06; lr: 1.00000; 14488/15160 tok/s;   1272 sec
+[2021-06-11 14:36:35,484 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_4000.pt
+[2021-06-11 14:36:49,633 INFO] Step 4050/20000; acc:  99.28; ppl:  1.04; xent: 0.04; lr: 1.00000; 15919/16223 tok/s;   1286 sec
+[2021-06-11 14:37:05,489 INFO] Step 4100/20000; acc:  98.25; ppl:  1.10; xent: 0.09; lr: 1.00000; 14974/15539 tok/s;   1302 sec
+[2021-06-11 14:37:23,553 INFO] Step 4150/20000; acc:  94.72; ppl:  1.44; xent: 0.36; lr: 1.00000; 14058/15848 tok/s;   1320 sec
+[2021-06-11 14:37:40,901 INFO] Step 4200/20000; acc:  97.83; ppl:  1.11; xent: 0.11; lr: 1.00000; 13800/14619 tok/s;   1337 sec
+[2021-06-11 14:37:53,732 INFO] Step 4250/20000; acc:  97.45; ppl:  1.16; xent: 0.15; lr: 1.00000; 16331/17627 tok/s;   1350 sec
+[2021-06-11 14:38:10,129 INFO] Step 4300/20000; acc:  98.24; ppl:  1.10; xent: 0.10; lr: 1.00000; 14426/15382 tok/s;   1366 sec
+[2021-06-11 14:38:25,121 INFO] Step 4350/20000; acc:  98.64; ppl:  1.07; xent: 0.07; lr: 1.00000; 15961/16363 tok/s;   1381 sec
+[2021-06-11 14:38:40,473 INFO] Step 4400/20000; acc:  98.38; ppl:  1.09; xent: 0.08; lr: 1.00000; 14890/16595 tok/s;   1397 sec
+[2021-06-11 14:38:57,584 INFO] Step 4450/20000; acc:  98.60; ppl:  1.08; xent: 0.08; lr: 1.00000; 14785/14149 tok/s;   1414 sec
+[2021-06-11 14:39:13,490 INFO] Step 4500/20000; acc:  98.22; ppl:  1.09; xent: 0.09; lr: 1.00000; 13499/14772 tok/s;   1430 sec
+[2021-06-11 14:39:29,016 INFO] Step 4550/20000; acc:  98.70; ppl:  1.07; xent: 0.07; lr: 1.00000; 15388/15781 tok/s;   1445 sec
+[2021-06-11 14:39:45,817 INFO] Step 4600/20000; acc:  99.19; ppl:  1.04; xent: 0.04; lr: 1.00000; 14557/14597 tok/s;   1462 sec
+[2021-06-11 14:39:59,468 INFO] Step 4650/20000; acc:  98.76; ppl:  1.07; xent: 0.07; lr: 1.00000; 16098/16844 tok/s;   1476 sec
+[2021-06-11 14:40:13,758 INFO] Step 4700/20000; acc:  98.94; ppl:  1.06; xent: 0.06; lr: 1.00000; 15137/16007 tok/s;   1490 sec
+[2021-06-11 14:40:29,377 INFO] Step 4750/20000; acc:  98.78; ppl:  1.06; xent: 0.06; lr: 1.00000; 15303/15763 tok/s;   1506 sec
+[2021-06-11 14:40:44,320 INFO] Step 4800/20000; acc:  98.41; ppl:  1.10; xent: 0.09; lr: 1.00000; 15108/16340 tok/s;   1521 sec
+[2021-06-11 14:41:01,223 INFO] Step 4850/20000; acc:  98.34; ppl:  1.09; xent: 0.08; lr: 1.00000; 15012/15140 tok/s;   1538 sec
+[2021-06-11 14:41:02,637 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 14:41:09,531 INFO] number of examples: 31041
+[2021-06-11 14:41:26,818 INFO] Step 4900/20000; acc:  98.20; ppl:  1.08; xent: 0.08; lr: 1.00000; 10115/10206 tok/s;   1563 sec
+[2021-06-11 14:41:42,525 INFO] Step 4950/20000; acc:  98.86; ppl:  1.05; xent: 0.05; lr: 1.00000; 13312/14833 tok/s;   1579 sec
+[2021-06-11 14:41:58,102 INFO] Step 5000/20000; acc:  99.16; ppl:  1.05; xent: 0.04; lr: 1.00000; 15193/15622 tok/s;   1594 sec
+[2021-06-11 14:41:58,109 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_5000.pt
+[2021-06-11 14:42:13,298 INFO] Step 5050/20000; acc:  98.44; ppl:  1.09; xent: 0.09; lr: 1.00000; 15164/15767 tok/s;   1610 sec
+[2021-06-11 14:42:29,893 INFO] Step 5100/20000; acc:  98.71; ppl:  1.06; xent: 0.06; lr: 1.00000; 14387/15233 tok/s;   1626 sec
+[2021-06-11 14:42:48,136 INFO] Step 5150/20000; acc:  94.07; ppl:  1.50; xent: 0.41; lr: 1.00000; 13489/15256 tok/s;   1644 sec
+[2021-06-11 14:43:01,356 INFO] Step 5200/20000; acc:  98.43; ppl:  1.11; xent: 0.11; lr: 1.00000; 16877/17352 tok/s;   1658 sec
+[2021-06-11 14:43:16,541 INFO] Step 5250/20000; acc:  98.09; ppl:  1.10; xent: 0.09; lr: 1.00000; 15445/16475 tok/s;   1673 sec
+[2021-06-11 14:43:34,304 INFO] Step 5300/20000; acc:  98.19; ppl:  1.11; xent: 0.11; lr: 1.00000; 14387/15232 tok/s;   1691 sec
+[2021-06-11 14:43:46,565 INFO] Step 5350/20000; acc:  99.11; ppl:  1.05; xent: 0.05; lr: 1.00000; 16748/17572 tok/s;   1703 sec
+[2021-06-11 14:44:05,509 INFO] Step 5400/20000; acc:  98.30; ppl:  1.08; xent: 0.08; lr: 1.00000; 14588/14764 tok/s;   1722 sec
+[2021-06-11 14:44:20,954 INFO] Step 5450/20000; acc:  98.42; ppl:  1.09; xent: 0.09; lr: 1.00000; 13754/14592 tok/s;   1737 sec
+[2021-06-11 14:44:36,225 INFO] Step 5500/20000; acc:  98.58; ppl:  1.07; xent: 0.07; lr: 1.00000; 14663/15547 tok/s;   1753 sec
+[2021-06-11 14:44:53,603 INFO] Step 5550/20000; acc:  99.01; ppl:  1.05; xent: 0.05; lr: 1.00000; 14287/14546 tok/s;   1770 sec
+[2021-06-11 14:45:07,003 INFO] Step 5600/20000; acc:  99.10; ppl:  1.04; xent: 0.04; lr: 1.00000; 16131/16397 tok/s;   1783 sec
+[2021-06-11 14:45:21,944 INFO] Step 5650/20000; acc:  98.60; ppl:  1.08; xent: 0.08; lr: 1.00000; 14960/15852 tok/s;   1798 sec
+[2021-06-11 14:45:37,621 INFO] Step 5700/20000; acc:  98.80; ppl:  1.06; xent: 0.06; lr: 1.00000; 15301/15949 tok/s;   1814 sec
+[2021-06-11 14:45:51,059 INFO] Step 5750/20000; acc:  98.35; ppl:  1.12; xent: 0.11; lr: 1.00000; 15596/16321 tok/s;   1827 sec
+[2021-06-11 14:46:08,639 INFO] Step 5800/20000; acc:  97.78; ppl:  1.12; xent: 0.11; lr: 1.00000; 14338/14969 tok/s;   1845 sec
+[2021-06-11 14:46:16,693 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 14:46:22,254 INFO] number of examples: 31041
+[2021-06-11 14:46:32,455 INFO] Step 5850/20000; acc:  98.64; ppl:  1.07; xent: 0.07; lr: 1.00000; 11008/11112 tok/s;   1869 sec
+[2021-06-11 14:46:49,699 INFO] Step 5900/20000; acc:  98.11; ppl:  1.09; xent: 0.09; lr: 1.00000; 12961/13892 tok/s;   1886 sec
+[2021-06-11 14:47:04,534 INFO] Step 5950/20000; acc:  99.00; ppl:  1.05; xent: 0.05; lr: 1.00000; 15176/15836 tok/s;   1901 sec
+[2021-06-11 14:47:18,679 INFO] Step 6000/20000; acc:  99.32; ppl:  1.04; xent: 0.04; lr: 1.00000; 15958/16309 tok/s;   1915 sec
+[2021-06-11 14:47:18,687 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_6000.pt
+[2021-06-11 14:47:35,368 INFO] Step 6050/20000; acc:  98.10; ppl:  1.11; xent: 0.11; lr: 1.00000; 14203/14841 tok/s;   1932 sec
+[2021-06-11 14:47:55,158 INFO] Step 6100/20000; acc:  94.83; ppl:  1.48; xent: 0.39; lr: 1.00000; 13678/15175 tok/s;   1951 sec
+[2021-06-11 14:48:11,872 INFO] Step 6150/20000; acc:  97.84; ppl:  1.13; xent: 0.12; lr: 1.00000; 14124/15060 tok/s;   1968 sec
+[2021-06-11 14:48:25,304 INFO] Step 6200/20000; acc:  97.00; ppl:  1.20; xent: 0.18; lr: 1.00000; 14874/16797 tok/s;   1982 sec
+[2021-06-11 14:48:42,284 INFO] Step 6250/20000; acc:  97.90; ppl:  1.12; xent: 0.12; lr: 1.00000; 14730/15390 tok/s;   1999 sec
+[2021-06-11 14:48:55,774 INFO] Step 6300/20000; acc:  98.91; ppl:  1.05; xent: 0.05; lr: 1.00000; 15954/16261 tok/s;   2012 sec
+[2021-06-11 14:49:12,984 INFO] Step 6350/20000; acc:  98.32; ppl:  1.09; xent: 0.09; lr: 1.00000; 14218/15596 tok/s;   2029 sec
+[2021-06-11 14:49:30,812 INFO] Step 6400/20000; acc:  98.34; ppl:  1.11; xent: 0.11; lr: 1.00000; 13844/13534 tok/s;   2047 sec
+[2021-06-11 14:49:45,455 INFO] Step 6450/20000; acc:  98.08; ppl:  1.12; xent: 0.11; lr: 1.00000; 14334/15288 tok/s;   2062 sec
+[2021-06-11 14:50:02,228 INFO] Step 6500/20000; acc:  98.51; ppl:  1.09; xent: 0.08; lr: 1.00000; 15263/15493 tok/s;   2079 sec
+[2021-06-11 14:50:17,645 INFO] Step 6550/20000; acc:  99.01; ppl:  1.05; xent: 0.05; lr: 1.00000; 14614/14826 tok/s;   2094 sec
+[2021-06-11 14:50:32,445 INFO] Step 6600/20000; acc:  98.42; ppl:  1.09; xent: 0.09; lr: 1.00000; 15116/15785 tok/s;   2109 sec
+[2021-06-11 14:50:47,754 INFO] Step 6650/20000; acc:  98.53; ppl:  1.07; xent: 0.07; lr: 1.00000; 14977/15759 tok/s;   2124 sec
+[2021-06-11 14:51:02,247 INFO] Step 6700/20000; acc:  98.60; ppl:  1.07; xent: 0.07; lr: 1.00000; 15719/16226 tok/s;   2139 sec
+[2021-06-11 14:51:17,415 INFO] Step 6750/20000; acc:  97.56; ppl:  1.19; xent: 0.17; lr: 1.00000; 15121/16273 tok/s;   2154 sec
+[2021-06-11 14:51:34,023 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 14:51:40,278 INFO] number of examples: 31041
+[2021-06-11 14:51:42,291 INFO] Step 6800/20000; acc:  97.50; ppl:  1.16; xent: 0.15; lr: 1.00000; 10209/10428 tok/s;   2179 sec
+[2021-06-11 14:52:00,627 INFO] Step 6850/20000; acc:  95.95; ppl:  1.25; xent: 0.22; lr: 1.00000; 13185/13874 tok/s;   2197 sec
+[2021-06-11 14:52:16,489 INFO] Step 6900/20000; acc:  97.18; ppl:  1.16; xent: 0.15; lr: 1.00000; 13971/14740 tok/s;   2213 sec
+[2021-06-11 14:52:31,962 INFO] Step 6950/20000; acc:  97.75; ppl:  1.13; xent: 0.13; lr: 1.00000; 15745/16068 tok/s;   2228 sec
+[2021-06-11 14:52:47,073 INFO] Step 7000/20000; acc:  96.64; ppl:  1.32; xent: 0.27; lr: 1.00000; 15127/15773 tok/s;   2243 sec
+[2021-06-11 14:52:47,080 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_7000.pt
+[2021-06-11 14:53:03,805 INFO] Step 7050/20000; acc:  95.89; ppl:  1.31; xent: 0.27; lr: 1.00000; 13997/14906 tok/s;   2260 sec
+[2021-06-11 14:53:22,578 INFO] Step 7100/20000; acc:  90.43; ppl:  2.54; xent: 0.93; lr: 1.00000; 13234/15087 tok/s;   2279 sec
+[2021-06-11 14:53:35,682 INFO] Step 7150/20000; acc:  96.25; ppl:  1.30; xent: 0.26; lr: 1.00000; 16582/17320 tok/s;   2292 sec
+[2021-06-11 14:53:51,008 INFO] Step 7200/20000; acc:  95.86; ppl:  1.42; xent: 0.35; lr: 1.00000; 15587/16237 tok/s;   2307 sec
+[2021-06-11 14:54:08,571 INFO] Step 7250/20000; acc:  95.84; ppl:  1.43; xent: 0.36; lr: 1.00000; 14475/15260 tok/s;   2325 sec
+[2021-06-11 14:54:23,055 INFO] Step 7300/20000; acc:  94.05; ppl:  1.57; xent: 0.45; lr: 1.00000; 14866/16567 tok/s;   2339 sec
+[2021-06-11 14:54:40,054 INFO] Step 7350/20000; acc:  96.72; ppl:  1.25; xent: 0.22; lr: 1.00000; 15038/14469 tok/s;   2356 sec
+[2021-06-11 14:54:55,543 INFO] Step 7400/20000; acc:  95.49; ppl:  1.37; xent: 0.31; lr: 1.00000; 14035/14998 tok/s;   2372 sec
+[2021-06-11 14:55:10,464 INFO] Step 7450/20000; acc:  95.44; ppl:  1.39; xent: 0.33; lr: 1.00000; 14645/15346 tok/s;   2387 sec
+[2021-06-11 14:55:29,002 INFO] Step 7500/20000; acc:  97.29; ppl:  1.21; xent: 0.19; lr: 1.00000; 14106/14366 tok/s;   2405 sec
+[2021-06-11 14:55:42,325 INFO] Step 7550/20000; acc:  96.46; ppl:  1.27; xent: 0.24; lr: 1.00000; 15946/16483 tok/s;   2419 sec
+[2021-06-11 14:55:57,142 INFO] Step 7600/20000; acc:  94.83; ppl:  1.69; xent: 0.53; lr: 1.00000; 14953/16034 tok/s;   2433 sec
+[2021-06-11 14:56:13,118 INFO] Step 7650/20000; acc:  95.64; ppl:  1.50; xent: 0.40; lr: 1.00000; 15322/15750 tok/s;   2449 sec
+[2021-06-11 14:56:27,203 INFO] Step 7700/20000; acc:  95.44; ppl:  1.40; xent: 0.34; lr: 1.00000; 15423/16200 tok/s;   2464 sec
+[2021-06-11 14:56:44,564 INFO] Step 7750/20000; acc:  93.20; ppl:  2.08; xent: 0.73; lr: 1.00000; 14494/15003 tok/s;   2481 sec
+[2021-06-11 14:56:49,980 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 14:56:56,954 INFO] number of examples: 31041
+[2021-06-11 14:57:10,296 INFO] Step 7800/20000; acc:  94.43; ppl:  1.68; xent: 0.52; lr: 1.00000; 9630/9933 tok/s;   2507 sec
+[2021-06-11 14:57:27,836 INFO] Step 7850/20000; acc:  93.91; ppl:  1.83; xent: 0.61; lr: 1.00000; 13621/14301 tok/s;   2524 sec
+[2021-06-11 14:57:42,166 INFO] Step 7900/20000; acc:  94.80; ppl:  1.72; xent: 0.54; lr: 1.00000; 14803/15600 tok/s;   2538 sec
+[2021-06-11 14:57:56,483 INFO] Step 7950/20000; acc:  96.62; ppl:  1.55; xent: 0.44; lr: 1.00000; 16176/16267 tok/s;   2553 sec
+[2021-06-11 14:58:13,841 INFO] Step 8000/20000; acc:  93.33; ppl:  1.86; xent: 0.62; lr: 1.00000; 13779/14653 tok/s;   2570 sec
+[2021-06-11 14:58:13,851 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_8000.pt
+[2021-06-11 14:58:32,051 INFO] Step 8050/20000; acc:  46.24; ppl:   nan; xent:  nan; lr: 1.00000; 14254/15683 tok/s;   2588 sec
+[2021-06-11 14:58:47,856 INFO] Step 8100/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14396/15790 tok/s;   2604 sec
+[2021-06-11 14:59:02,676 INFO] Step 8150/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15339/16431 tok/s;   2619 sec
+[2021-06-11 14:59:18,607 INFO] Step 8200/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14569/15396 tok/s;   2635 sec
+[2021-06-11 14:59:32,028 INFO] Step 8250/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 16220/16535 tok/s;   2648 sec
+[2021-06-11 14:59:48,752 INFO] Step 8300/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14505/15835 tok/s;   2665 sec
+[2021-06-11 15:00:06,197 INFO] Step 8350/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14460/14232 tok/s;   2683 sec
+[2021-06-11 15:00:21,059 INFO] Step 8400/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14079/14936 tok/s;   2697 sec
+[2021-06-11 15:00:39,168 INFO] Step 8450/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14148/14739 tok/s;   2715 sec
+[2021-06-11 15:00:53,706 INFO] Step 8500/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15758/15791 tok/s;   2730 sec
+[2021-06-11 15:01:08,345 INFO] Step 8550/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14965/16068 tok/s;   2745 sec
+[2021-06-11 15:01:23,832 INFO] Step 8600/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15142/15365 tok/s;   2760 sec
+[2021-06-11 15:01:37,890 INFO] Step 8650/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15273/16071 tok/s;   2774 sec
+[2021-06-11 15:01:52,610 INFO] Step 8700/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15570/16698 tok/s;   2789 sec
+[2021-06-11 15:02:07,239 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 15:02:13,731 INFO] number of examples: 31041
+[2021-06-11 15:02:18,051 INFO] Step 8750/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 10315/10356 tok/s;   2814 sec
+[2021-06-11 15:02:38,096 INFO] Step 8800/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 12587/13451 tok/s;   2834 sec
+[2021-06-11 15:02:52,797 INFO] Step 8850/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14454/15249 tok/s;   2849 sec
+[2021-06-11 15:03:07,840 INFO] Step 8900/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15706/15947 tok/s;   2864 sec
+[2021-06-11 15:03:23,385 INFO] Step 8950/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14648/15450 tok/s;   2880 sec
+[2021-06-11 15:03:40,224 INFO] Step 9000/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13669/15868 tok/s;   2897 sec
+[2021-06-11 15:03:40,232 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_9000.pt
+[2021-06-11 15:03:58,689 INFO] Step 9050/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13887/14242 tok/s;   2915 sec
+[2021-06-11 15:04:12,480 INFO] Step 9100/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 16185/17339 tok/s;   2929 sec
+[2021-06-11 15:04:28,070 INFO] Step 9150/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15574/16369 tok/s;   2944 sec
+[2021-06-11 15:04:44,081 INFO] Step 9200/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14830/15158 tok/s;   2960 sec
+[2021-06-11 15:04:59,322 INFO] Step 9250/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14788/16397 tok/s;   2976 sec
+[2021-06-11 15:05:17,070 INFO] Step 9300/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14149/13839 tok/s;   2993 sec
+[2021-06-11 15:05:32,666 INFO] Step 9350/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13849/14673 tok/s;   3009 sec
+[2021-06-11 15:05:48,886 INFO] Step 9400/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14709/15545 tok/s;   3025 sec
+[2021-06-11 15:06:05,903 INFO] Step 9450/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14138/14197 tok/s;   3042 sec
+[2021-06-11 15:06:19,793 INFO] Step 9500/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 16141/16462 tok/s;   3056 sec
+[2021-06-11 15:06:34,204 INFO] Step 9550/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14541/15811 tok/s;   3071 sec
+[2021-06-11 15:06:50,537 INFO] Step 9600/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15335/15710 tok/s;   3087 sec
+[2021-06-11 15:07:05,403 INFO] Step 9650/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14820/15807 tok/s;   3102 sec
+[2021-06-11 15:07:22,944 INFO] Step 9700/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14355/14730 tok/s;   3119 sec
+[2021-06-11 15:07:25,605 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 15:07:32,086 INFO] number of examples: 31041
+[2021-06-11 15:07:48,313 INFO] Step 9750/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 10321/10295 tok/s;   3145 sec
+[2021-06-11 15:08:05,034 INFO] Step 9800/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 12853/14474 tok/s;   3161 sec
+[2021-06-11 15:08:20,263 INFO] Step 9850/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14982/15422 tok/s;   3177 sec
+[2021-06-11 15:08:35,245 INFO] Step 9900/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15188/15458 tok/s;   3192 sec
+[2021-06-11 15:08:52,784 INFO] Step 9950/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13901/14985 tok/s;   3209 sec
+[2021-06-11 15:09:10,208 INFO] Step 10000/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14291/15420 tok/s;   3227 sec
+[2021-06-11 15:09:10,209 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.valid.0.pt
+[2021-06-11 15:09:10,782 INFO] number of examples: 3880
+[2021-06-11 15:09:29,296 INFO] Validation perplexity: nan
+[2021-06-11 15:09:29,296 INFO] Validation accuracy: 0.0606991
+[2021-06-11 15:09:29,302 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_10000.pt
+[2021-06-11 15:09:44,011 INFO] Step 10050/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 6532/7085 tok/s;   3260 sec
+[2021-06-11 15:09:59,216 INFO] Step 10100/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15557/16627 tok/s;   3276 sec
+[2021-06-11 15:10:16,471 INFO] Step 10150/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14322/15154 tok/s;   3293 sec
+[2021-06-11 15:10:28,051 INFO] Step 10200/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 16679/17597 tok/s;   3304 sec
+[2021-06-11 15:10:45,737 INFO] Step 10250/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14939/15747 tok/s;   3322 sec
+[2021-06-11 15:11:01,975 INFO] Step 10300/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14502/14256 tok/s;   3338 sec
+[2021-06-11 15:11:17,933 INFO] Step 10350/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13824/15052 tok/s;   3354 sec
+[2021-06-11 15:11:35,173 INFO] Step 10400/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14207/14438 tok/s;   3372 sec
+[2021-06-11 15:11:48,939 INFO] Step 10450/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 16310/16617 tok/s;   3385 sec
+[2021-06-11 15:12:03,865 INFO] Step 10500/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15257/16103 tok/s;   3400 sec
+[2021-06-11 15:12:18,968 INFO] Step 10550/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15379/16091 tok/s;   3415 sec
+[2021-06-11 15:12:32,689 INFO] Step 10600/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15670/16355 tok/s;   3429 sec
+[2021-06-11 15:12:49,402 INFO] Step 10650/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14875/15125 tok/s;   3446 sec
+[2021-06-11 15:12:59,556 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 15:13:06,784 INFO] number of examples: 31041
+[2021-06-11 15:13:14,960 INFO] Step 10700/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 9818/10462 tok/s;   3471 sec
+[2021-06-11 15:13:33,800 INFO] Step 10750/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13171/13631 tok/s;   3490 sec
+[2021-06-11 15:13:48,523 INFO] Step 10800/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14689/15407 tok/s;   3505 sec
+[2021-06-11 15:14:03,316 INFO] Step 10850/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15339/15661 tok/s;   3520 sec
+[2021-06-11 15:14:19,691 INFO] Step 10900/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14479/14961 tok/s;   3536 sec
+[2021-06-11 15:14:38,710 INFO] Step 10950/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13699/15428 tok/s;   3555 sec
+[2021-06-11 15:14:56,635 INFO] Step 11000/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13409/14190 tok/s;   3573 sec
+[2021-06-11 15:14:56,643 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_11000.pt
+[2021-06-11 15:15:10,147 INFO] Step 11050/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14739/16537 tok/s;   3586 sec
+[2021-06-11 15:15:27,187 INFO] Step 11100/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14560/15256 tok/s;   3604 sec
+[2021-06-11 15:15:41,707 INFO] Step 11150/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15712/15907 tok/s;   3618 sec
+[2021-06-11 15:15:58,262 INFO] Step 11200/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14300/15852 tok/s;   3635 sec
+[2021-06-11 15:16:15,743 INFO] Step 11250/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14482/13906 tok/s;   3652 sec
+[2021-06-11 15:16:31,587 INFO] Step 11300/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13531/14758 tok/s;   3668 sec
+[2021-06-11 15:16:46,578 INFO] Step 11350/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15245/15623 tok/s;   3683 sec
+[2021-06-11 15:17:03,850 INFO] Step 11400/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14269/14330 tok/s;   3700 sec
+[2021-06-11 15:17:18,734 INFO] Step 11450/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15231/15933 tok/s;   3715 sec
+[2021-06-11 15:17:33,185 INFO] Step 11500/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14616/15608 tok/s;   3730 sec
+[2021-06-11 15:17:48,930 INFO] Step 11550/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15227/15549 tok/s;   3745 sec
+[2021-06-11 15:18:04,647 INFO] Step 11600/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14898/16062 tok/s;   3761 sec
+[2021-06-11 15:18:21,979 INFO] Step 11650/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14031/14272 tok/s;   3778 sec
+[2021-06-11 15:18:22,380 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 15:18:29,048 INFO] number of examples: 31041
+[2021-06-11 15:18:47,558 INFO] Step 11700/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 9987/10255 tok/s;   3804 sec
+[2021-06-11 15:19:03,383 INFO] Step 11750/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13419/14546 tok/s;   3820 sec
+[2021-06-11 15:19:19,117 INFO] Step 11800/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14932/15340 tok/s;   3835 sec
+[2021-06-11 15:19:34,841 INFO] Step 11850/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15116/15688 tok/s;   3851 sec
+[2021-06-11 15:19:51,672 INFO] Step 11900/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14007/14854 tok/s;   3868 sec
+[2021-06-11 15:20:10,273 INFO] Step 11950/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13261/14992 tok/s;   3887 sec
+[2021-06-11 15:20:23,958 INFO] Step 12000/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15999/16891 tok/s;   3900 sec
+[2021-06-11 15:20:23,966 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_12000.pt
+[2021-06-11 15:20:39,621 INFO] Step 12050/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15462/16134 tok/s;   3916 sec
+[2021-06-11 15:20:57,070 INFO] Step 12100/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14381/15169 tok/s;   3933 sec
+[2021-06-11 15:21:10,267 INFO] Step 12150/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15362/16535 tok/s;   3947 sec
+[2021-06-11 15:21:28,954 INFO] Step 12200/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14848/14804 tok/s;   3965 sec
+[2021-06-11 15:21:44,202 INFO] Step 12250/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13857/14730 tok/s;   3981 sec
+[2021-06-11 15:21:59,632 INFO] Step 12300/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14610/15356 tok/s;   3996 sec
+[2021-06-11 15:22:17,619 INFO] Step 12350/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14187/14474 tok/s;   4014 sec
+[2021-06-11 15:22:30,771 INFO] Step 12400/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15888/16176 tok/s;   4027 sec
+[2021-06-11 15:22:45,926 INFO] Step 12450/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14809/15685 tok/s;   4042 sec
+[2021-06-11 15:23:02,172 INFO] Step 12500/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14654/15509 tok/s;   4058 sec
+[2021-06-11 15:23:15,745 INFO] Step 12550/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 16059/16486 tok/s;   4072 sec
+[2021-06-11 15:23:33,384 INFO] Step 12600/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13996/14637 tok/s;   4090 sec
+[2021-06-11 15:23:40,890 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 15:23:47,645 INFO] number of examples: 31041
+[2021-06-11 15:23:59,173 INFO] Step 12650/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 10201/10299 tok/s;   4115 sec
+[2021-06-11 15:24:17,752 INFO] Step 12700/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 12787/13664 tok/s;   4134 sec
+[2021-06-11 15:24:32,034 INFO] Step 12750/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14614/15425 tok/s;   4148 sec
+[2021-06-11 15:24:46,198 INFO] Step 12800/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15929/16138 tok/s;   4163 sec
+[2021-06-11 15:25:03,605 INFO] Step 12850/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13995/14614 tok/s;   4180 sec
+[2021-06-11 15:25:22,802 INFO] Step 12900/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13758/15305 tok/s;   4199 sec
+[2021-06-11 15:25:39,404 INFO] Step 12950/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13878/15348 tok/s;   4216 sec
+[2021-06-11 15:25:53,601 INFO] Step 13000/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15050/16161 tok/s;   4230 sec
+[2021-06-11 15:25:53,612 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_13000.pt
+[2021-06-11 15:26:10,321 INFO] Step 13050/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14581/15328 tok/s;   4247 sec
+[2021-06-11 15:26:23,877 INFO] Step 13100/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15740/16026 tok/s;   4260 sec
+[2021-06-11 15:26:41,416 INFO] Step 13150/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13865/15208 tok/s;   4278 sec
+[2021-06-11 15:26:59,194 INFO] Step 13200/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13988/13675 tok/s;   4296 sec
+[2021-06-11 15:27:14,794 INFO] Step 13250/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13343/14263 tok/s;   4311 sec
+[2021-06-11 15:27:32,551 INFO] Step 13300/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14340/14765 tok/s;   4329 sec
+[2021-06-11 15:27:47,937 INFO] Step 13350/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14887/14933 tok/s;   4344 sec
+[2021-06-11 15:28:03,085 INFO] Step 13400/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14747/15599 tok/s;   4359 sec
+[2021-06-11 15:28:18,573 INFO] Step 13450/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14684/15275 tok/s;   4375 sec
+[2021-06-11 15:28:33,305 INFO] Step 13500/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15283/15894 tok/s;   4390 sec
+[2021-06-11 15:28:48,911 INFO] Step 13550/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14814/15873 tok/s;   4405 sec
+[2021-06-11 15:29:04,898 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 15:29:11,812 INFO] number of examples: 31041
+[2021-06-11 15:29:14,502 INFO] Step 13600/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 9970/10101 tok/s;   4431 sec
+[2021-06-11 15:29:33,667 INFO] Step 13650/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 12950/13591 tok/s;   4450 sec
+[2021-06-11 15:29:49,394 INFO] Step 13700/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13766/14648 tok/s;   4466 sec
+[2021-06-11 15:30:04,801 INFO] Step 13750/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15591/16021 tok/s;   4481 sec
+[2021-06-11 15:30:19,888 INFO] Step 13800/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15201/15605 tok/s;   4496 sec
+[2021-06-11 15:30:36,840 INFO] Step 13850/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13808/15092 tok/s;   4513 sec
+[2021-06-11 15:30:55,951 INFO] Step 13900/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13158/14672 tok/s;   4532 sec
+[2021-06-11 15:31:09,137 INFO] Step 13950/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 16993/17729 tok/s;   4545 sec
+[2021-06-11 15:31:24,221 INFO] Step 14000/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15393/16029 tok/s;   4561 sec
+[2021-06-11 15:31:24,230 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_14000.pt
+[2021-06-11 15:31:41,764 INFO] Step 14050/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14356/15150 tok/s;   4578 sec
+[2021-06-11 15:31:56,814 INFO] Step 14100/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14823/16450 tok/s;   4593 sec
+[2021-06-11 15:32:14,017 INFO] Step 14150/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14522/14040 tok/s;   4610 sec
+[2021-06-11 15:32:29,112 INFO] Step 14200/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14229/15098 tok/s;   4625 sec
+[2021-06-11 15:32:44,908 INFO] Step 14250/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14224/15060 tok/s;   4641 sec
+[2021-06-11 15:33:02,864 INFO] Step 14300/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14200/14339 tok/s;   4659 sec
+[2021-06-11 15:33:16,615 INFO] Step 14350/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15822/16334 tok/s;   4673 sec
+[2021-06-11 15:33:31,294 INFO] Step 14400/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14703/15799 tok/s;   4688 sec
+[2021-06-11 15:33:47,531 INFO] Step 14450/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15355/15771 tok/s;   4704 sec
+[2021-06-11 15:34:02,330 INFO] Step 14500/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14947/15829 tok/s;   4719 sec
+[2021-06-11 15:34:19,770 INFO] Step 14550/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14529/14912 tok/s;   4736 sec
+[2021-06-11 15:34:24,009 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 15:34:30,899 INFO] number of examples: 31041
+[2021-06-11 15:34:46,104 INFO] Step 14600/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 9831/9872 tok/s;   4762 sec
+[2021-06-11 15:35:02,504 INFO] Step 14650/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13038/14202 tok/s;   4779 sec
+[2021-06-11 15:35:17,686 INFO] Step 14700/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14915/15629 tok/s;   4794 sec
+[2021-06-11 15:35:32,547 INFO] Step 14750/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15382/15532 tok/s;   4809 sec
+[2021-06-11 15:35:50,003 INFO] Step 14800/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13745/14571 tok/s;   4826 sec
+[2021-06-11 15:36:08,551 INFO] Step 14850/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13648/15277 tok/s;   4845 sec
+[2021-06-11 15:36:23,988 INFO] Step 14900/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14689/15932 tok/s;   4860 sec
+[2021-06-11 15:36:39,443 INFO] Step 14950/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15135/16126 tok/s;   4876 sec
+[2021-06-11 15:36:55,616 INFO] Step 15000/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14221/15023 tok/s;   4892 sec
+[2021-06-11 15:36:55,623 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_15000.pt
+[2021-06-11 15:37:09,339 INFO] Step 15050/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15435/16338 tok/s;   4906 sec
+[2021-06-11 15:37:26,264 INFO] Step 15100/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14717/15559 tok/s;   4923 sec
+[2021-06-11 15:37:44,175 INFO] Step 15150/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14082/13863 tok/s;   4941 sec
+[2021-06-11 15:37:59,746 INFO] Step 15200/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13246/14500 tok/s;   4956 sec
+[2021-06-11 15:38:18,000 INFO] Step 15250/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14101/14318 tok/s;   4974 sec
+[2021-06-11 15:38:32,524 INFO] Step 15300/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15352/15363 tok/s;   4989 sec
+[2021-06-11 15:38:48,348 INFO] Step 15350/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14260/15314 tok/s;   5005 sec
+[2021-06-11 15:39:03,629 INFO] Step 15400/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15203/15409 tok/s;   5020 sec
+[2021-06-11 15:39:18,385 INFO] Step 15450/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15023/15777 tok/s;   5035 sec
+[2021-06-11 15:39:33,825 INFO] Step 15500/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14274/15269 tok/s;   5050 sec
+[2021-06-11 15:39:47,085 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 15:39:54,131 INFO] number of examples: 31041
+[2021-06-11 15:39:59,585 INFO] Step 15550/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 10583/10654 tok/s;   5076 sec
+[2021-06-11 15:40:19,294 INFO] Step 15600/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 12292/13209 tok/s;   5096 sec
+[2021-06-11 15:40:34,469 INFO] Step 15650/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14217/14939 tok/s;   5111 sec
+[2021-06-11 15:40:49,152 INFO] Step 15700/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15737/15996 tok/s;   5125 sec
+[2021-06-11 15:41:05,482 INFO] Step 15750/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14740/15328 tok/s;   5142 sec
+[2021-06-11 15:41:23,386 INFO] Step 15800/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13664/15458 tok/s;   5160 sec
+[2021-06-11 15:41:41,532 INFO] Step 15850/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13836/14589 tok/s;   5178 sec
+[2021-06-11 15:41:54,392 INFO] Step 15900/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15903/17219 tok/s;   5191 sec
+[2021-06-11 15:42:10,664 INFO] Step 15950/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14582/15474 tok/s;   5207 sec
+[2021-06-11 15:42:25,951 INFO] Step 16000/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15659/15880 tok/s;   5222 sec
+[2021-06-11 15:42:25,958 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_16000.pt
+[2021-06-11 15:42:41,808 INFO] Step 16050/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14412/16349 tok/s;   5238 sec
+[2021-06-11 15:42:59,179 INFO] Step 16100/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14503/13823 tok/s;   5256 sec
+[2021-06-11 15:43:15,603 INFO] Step 16150/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13181/14408 tok/s;   5272 sec
+[2021-06-11 15:43:31,225 INFO] Step 16200/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15438/15791 tok/s;   5288 sec
+[2021-06-11 15:43:48,436 INFO] Step 16250/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14179/14243 tok/s;   5305 sec
+[2021-06-11 15:44:02,473 INFO] Step 16300/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15585/16344 tok/s;   5319 sec
+[2021-06-11 15:44:16,645 INFO] Step 16350/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14685/15568 tok/s;   5333 sec
+[2021-06-11 15:44:33,273 INFO] Step 16400/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14941/15380 tok/s;   5350 sec
+[2021-06-11 15:44:48,295 INFO] Step 16450/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14710/15899 tok/s;   5365 sec
+[2021-06-11 15:45:05,637 INFO] Step 16500/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14663/14792 tok/s;   5382 sec
+[2021-06-11 15:45:07,655 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 15:45:13,657 INFO] number of examples: 31041
+[2021-06-11 15:45:30,939 INFO] Step 16550/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 10251/10340 tok/s;   5407 sec
+[2021-06-11 15:45:47,337 INFO] Step 16600/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13011/14472 tok/s;   5424 sec
+[2021-06-11 15:46:03,202 INFO] Step 16650/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14688/15129 tok/s;   5440 sec
+[2021-06-11 15:46:18,608 INFO] Step 16700/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15289/15545 tok/s;   5455 sec
+[2021-06-11 15:46:35,925 INFO] Step 16750/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13558/14660 tok/s;   5472 sec
+[2021-06-11 15:46:54,067 INFO] Step 16800/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13545/14916 tok/s;   5490 sec
+[2021-06-11 15:47:08,473 INFO] Step 16850/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15560/16521 tok/s;   5505 sec
+[2021-06-11 15:47:24,013 INFO] Step 16900/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15055/16059 tok/s;   5520 sec
+[2021-06-11 15:47:42,076 INFO] Step 16950/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14027/14834 tok/s;   5538 sec
+[2021-06-11 15:47:53,928 INFO] Step 17000/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 16109/17008 tok/s;   5550 sec
+[2021-06-11 15:47:53,939 INFO] Saving checkpoint /root/Sequencer/chai/full_sard/final-model_step_17000.pt
+[2021-06-11 15:48:12,936 INFO] Step 17050/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14620/15113 tok/s;   5569 sec
+[2021-06-11 15:48:28,901 INFO] Step 17100/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13600/13959 tok/s;   5585 sec
+[2021-06-11 15:48:45,227 INFO] Step 17150/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13990/14857 tok/s;   5602 sec
+[2021-06-11 15:49:03,299 INFO] Step 17200/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13936/14181 tok/s;   5620 sec
+[2021-06-11 15:49:17,172 INFO] Step 17250/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15784/16065 tok/s;   5633 sec
+[2021-06-11 15:49:32,396 INFO] Step 17300/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14607/15473 tok/s;   5649 sec
+[2021-06-11 15:49:48,368 INFO] Step 17350/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15027/15653 tok/s;   5665 sec
+[2021-06-11 15:50:01,984 INFO] Step 17400/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15074/15822 tok/s;   5678 sec
+[2021-06-11 15:50:20,622 INFO] Step 17450/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13777/14403 tok/s;   5697 sec
+[2021-06-11 15:50:29,362 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-11 15:50:36,915 INFO] number of examples: 31041
+[2021-06-11 15:50:46,727 INFO] Step 17500/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 9964/10039 tok/s;   5723 sec
+[2021-06-11 15:51:04,464 INFO] Step 17550/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 12912/13801 tok/s;   5741 sec
+[2021-06-11 15:51:19,573 INFO] Step 17600/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14777/15454 tok/s;   5756 sec
+[2021-06-11 15:51:33,802 INFO] Step 17650/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 15688/15999 tok/s;   5770 sec
+[2021-06-11 15:51:50,340 INFO] Step 17700/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 14339/14977 tok/s;   5787 sec
+[2021-06-11 15:52:10,679 INFO] Step 17750/20000; acc:   0.00; ppl:   nan; xent:  nan; lr: 1.00000; 13376/14864 tok/s;   5807 sec

@@ -1,0 +1,1 @@
+python ./gtrans/eval/find_best_model.py -data_root ./gtrans/real_world_final_processed -data_name real_world_final -save_dir ./real_world_final_save/ -gnn_type "s2v_multi" -max_lv 4 -resampling True -comp_method "mlp"

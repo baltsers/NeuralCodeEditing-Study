@@ -1,0 +1,156 @@
+(devign) root@4dd4d0b94873:~/Devign# bash devign_reveal_devign_all4.sh
+Using backend: pytorch
+[03/07/2022 - 06:24:08] File "/root/Devign/data_loader/dataset.py", line 53     Reading Train File!
+  0%|                                                                                                                                                                                              | 0/5000 [00:00<?, ?it/s]/opt/conda/envs/devign/lib/python3.8/site-packages/dgl/base.py:45: DGLWarning: Recommend creating graphs by `dgl.graph(data)` instead of `dgl.DGLGraph(data)`.
+  return warnings.warn(message, category=category, stacklevel=1)
+/opt/conda/envs/devign/lib/python3.8/site-packages/dgl/base.py:45: DGLWarning: DGLGraph.add_edge is deprecated. Please use DGLGraph.add_edges
+  return warnings.warn(message, category=category, stacklevel=1)
+[03/07/2022 - 06:24:15] File "/root/Devign/data_loader/dataset.py", line 64     Feature Size 169
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5000/5000 [02:57<00:00, 28.15it/s]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5000/5000 [02:59<00:00, 27.86it/s]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5000/5000 [03:00<00:00, 27.65it/s]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3169/3169 [01:58<00:00, 26.65it/s]
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 815/815 [00:56<00:00, 14.43it/s]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8082/8082 [03:38<00:00, 36.97it/s]
+[03/07/2022 - 06:40:19] File "/root/Devign/data_loader/dataset.py", line 79     Reading Test File!
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3000/3000 [02:38<00:00, 18.96it/s]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1063/1063 [00:55<00:00, 19.24it/s]
+train: 27066 2473
+test: 4063 1996
+[03/07/2022 - 06:44:11] File "devign_reveal_devign_all4.py", line 79    Total Parameters : 1148553
+[03/07/2022 - 06:44:11] File "devign_reveal_devign_all4.py", line 80    ####################################################################################################
+[03/07/2022 - 06:44:13] File "/root/Devign/trainer.py", line 175        Start Training
+/opt/conda/envs/devign/lib/python3.8/site-packages/torch/nn/functional.py:652: UserWarning: Named tensors and all their associated APIs are an experimental feature and subject to change. Please do not use them for anything important until they are released as stable. (Triggered internally at  /pytorch/c10/core/TensorImpl.h:1156.)
+  return torch.max_pool1d(input, kernel_size, stride, padding, dilation, ceil_mode)
+[03/07/2022 - 06:45:11] File "/root/Devign/trainer.py", line 216        Step 127
+[03/07/2022 - 06:45:11] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 06:46:14] File "/root/Devign/trainer.py", line 216        Step 255
+[03/07/2022 - 06:46:14] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 06:47:20] File "/root/Devign/trainer.py", line 216        Step 383
+[03/07/2022 - 06:47:20] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 06:48:24] File "/root/Devign/trainer.py", line 216        Step 511
+[03/07/2022 - 06:48:24] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 06:49:32] File "/root/Devign/trainer.py", line 216        Step 639
+[03/07/2022 - 06:49:32] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 06:50:40] File "/root/Devign/trainer.py", line 216        Step 767
+[03/07/2022 - 06:50:40] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 06:51:49] File "/root/Devign/trainer.py", line 216        Step 895
+[03/07/2022 - 06:51:49] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 06:52:56] File "/root/Devign/trainer.py", line 216        Step 1023
+[03/07/2022 - 06:52:56] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 06:54:13] File "/root/Devign/trainer.py", line 216        Step 1151
+[03/07/2022 - 06:54:13] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 06:55:35] File "/root/Devign/trainer.py", line 216        Step 1279
+[03/07/2022 - 06:55:35] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 06:56:17] File "/root/Devign/trainer.py", line 216        Step 1407
+[03/07/2022 - 06:56:17] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 06:57:08] File "/root/Devign/trainer.py", line 216        Step 1535
+[03/07/2022 - 06:57:08] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 06:58:13] File "/root/Devign/trainer.py", line 216        Step 1663
+[03/07/2022 - 06:58:13] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 06:59:18] File "/root/Devign/trainer.py", line 216        Step 1791
+[03/07/2022 - 06:59:18] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:00:24] File "/root/Devign/trainer.py", line 216        Step 1919
+[03/07/2022 - 07:00:24] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:03:04] File "/root/Devign/trainer.py", line 235        models/reveal_devign_all4/GGNNSumModel  Test Accuracy: 92.74    Precision: 74.05        Recall: 31.62   F1: 44.32
+[03/07/2022 - 07:03:04] File "/root/Devign/trainer.py", line 236        ====================================================================================================
+/opt/conda/envs/devign/lib/python3.8/site-packages/dgl/base.py:45: DGLWarning: Recommend creating graphs by `dgl.graph(data)` instead of `dgl.DGLGraph(data)`.
+  return warnings.warn(message, category=category, stacklevel=1)
+testing result: 51.157065484982766 52.820512820512825 5.162907268170426 9.406392694063927
+neg testing result: [51.157065484982766, 51.07318334626325, 95.54910498306725, 6656.555443208627]
+Using backend: pytorch
+[03/07/2022 - 07:03:25] File "devign_reveal_devign_all4.py", line 46    Reading already processed data from ./reveal_devign_all4/processed.bin!
+[03/07/2022 - 07:03:36] File "devign_reveal_devign_all4.py", line 48    27066   0       4063
+train: 27066 2473
+test: 4063 1996
+[03/07/2022 - 07:03:36] File "devign_reveal_devign_all4.py", line 79    Total Parameters : 1148553
+[03/07/2022 - 07:03:36] File "devign_reveal_devign_all4.py", line 80    ####################################################################################################
+[03/07/2022 - 07:03:39] File "/root/Devign/trainer.py", line 175        Start Training
+/opt/conda/envs/devign/lib/python3.8/site-packages/dgl/base.py:45: DGLWarning: Recommend creating graphs by `dgl.graph(data)` instead of `dgl.DGLGraph(data)`.
+  return warnings.warn(message, category=category, stacklevel=1)
+/opt/conda/envs/devign/lib/python3.8/site-packages/torch/nn/functional.py:652: UserWarning: Named tensors and all their associated APIs are an experimental feature and subject to change. Please do not use them for anything important until they are released as stable. (Triggered internally at  /pytorch/c10/core/TensorImpl.h:1156.)
+  return torch.max_pool1d(input, kernel_size, stride, padding, dilation, ceil_mode)
+[03/07/2022 - 07:04:45] File "/root/Devign/trainer.py", line 216        Step 127
+[03/07/2022 - 07:04:45] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:06:03] File "/root/Devign/trainer.py", line 216        Step 255
+[03/07/2022 - 07:06:03] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:07:22] File "/root/Devign/trainer.py", line 216        Step 383
+[03/07/2022 - 07:07:22] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:07:46] File "/root/Devign/trainer.py", line 216        Step 511
+[03/07/2022 - 07:07:46] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:08:09] File "/root/Devign/trainer.py", line 216        Step 639
+[03/07/2022 - 07:08:09] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:08:31] File "/root/Devign/trainer.py", line 216        Step 767
+[03/07/2022 - 07:08:31] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:08:54] File "/root/Devign/trainer.py", line 216        Step 895
+[03/07/2022 - 07:08:54] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:09:17] File "/root/Devign/trainer.py", line 216        Step 1023
+[03/07/2022 - 07:09:17] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:09:40] File "/root/Devign/trainer.py", line 216        Step 1151
+[03/07/2022 - 07:09:40] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:10:02] File "/root/Devign/trainer.py", line 216        Step 1279
+[03/07/2022 - 07:10:02] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:10:26] File "/root/Devign/trainer.py", line 216        Step 1407
+[03/07/2022 - 07:10:26] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:10:47] File "/root/Devign/trainer.py", line 216        Step 1535
+[03/07/2022 - 07:10:47] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:11:09] File "/root/Devign/trainer.py", line 216        Step 1663
+[03/07/2022 - 07:11:09] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:11:29] File "/root/Devign/trainer.py", line 216        Step 1791
+[03/07/2022 - 07:11:29] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:11:49] File "/root/Devign/trainer.py", line 216        Step 1919
+[03/07/2022 - 07:11:49] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:12:29] File "/root/Devign/trainer.py", line 235        models/reveal_devign_all4/GGNNSumModel  Test Accuracy: 92.26    Precision: 84.27        Recall: 18.84   F1: 30.80
+[03/07/2022 - 07:12:29] File "/root/Devign/trainer.py", line 236        ====================================================================================================
+/opt/conda/envs/devign/lib/python3.8/site-packages/dgl/base.py:45: DGLWarning: Recommend creating graphs by `dgl.graph(data)` instead of `dgl.DGLGraph(data)`.
+  return warnings.warn(message, category=category, stacklevel=1)
+testing result: 50.984736582964054 53.333333333333336 1.6040100250626566 3.114355231143553
+neg testing result: [50.984736582964054, 50.94952523738131, 98.64537977745525, 6719.393639808864]
+Using backend: pytorch
+[03/07/2022 - 07:12:38] File "devign_reveal_devign_all4.py", line 46    Reading already processed data from ./reveal_devign_all4/processed.bin!
+[03/07/2022 - 07:12:47] File "devign_reveal_devign_all4.py", line 48    27066   0       4063
+train: 27066 2473
+test: 4063 1996
+[03/07/2022 - 07:12:47] File "devign_reveal_devign_all4.py", line 79    Total Parameters : 1148553
+[03/07/2022 - 07:12:47] File "devign_reveal_devign_all4.py", line 80    ####################################################################################################
+[03/07/2022 - 07:12:49] File "/root/Devign/trainer.py", line 175        Start Training
+/opt/conda/envs/devign/lib/python3.8/site-packages/dgl/base.py:45: DGLWarning: Recommend creating graphs by `dgl.graph(data)` instead of `dgl.DGLGraph(data)`.
+  return warnings.warn(message, category=category, stacklevel=1)
+/opt/conda/envs/devign/lib/python3.8/site-packages/torch/nn/functional.py:652: UserWarning: Named tensors and all their associated APIs are an experimental feature and subject to change. Please do not use them for anything important until they are released as stable. (Triggered internally at  /pytorch/c10/core/TensorImpl.h:1156.)
+  return torch.max_pool1d(input, kernel_size, stride, padding, dilation, ceil_mode)
+[03/07/2022 - 07:13:09] File "/root/Devign/trainer.py", line 216        Step 127
+[03/07/2022 - 07:13:09] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:13:28] File "/root/Devign/trainer.py", line 216        Step 255
+[03/07/2022 - 07:13:28] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:13:47] File "/root/Devign/trainer.py", line 216        Step 383
+[03/07/2022 - 07:13:47] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:14:07] File "/root/Devign/trainer.py", line 216        Step 511
+[03/07/2022 - 07:14:07] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:14:27] File "/root/Devign/trainer.py", line 216        Step 639
+[03/07/2022 - 07:14:27] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:14:47] File "/root/Devign/trainer.py", line 216        Step 767
+[03/07/2022 - 07:14:47] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:15:06] File "/root/Devign/trainer.py", line 216        Step 895
+[03/07/2022 - 07:15:06] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:15:27] File "/root/Devign/trainer.py", line 216        Step 1023
+[03/07/2022 - 07:15:27] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:15:46] File "/root/Devign/trainer.py", line 216        Step 1151
+[03/07/2022 - 07:15:46] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:16:06] File "/root/Devign/trainer.py", line 216        Step 1279
+[03/07/2022 - 07:16:06] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:16:26] File "/root/Devign/trainer.py", line 216        Step 1407
+[03/07/2022 - 07:16:26] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:16:45] File "/root/Devign/trainer.py", line 216        Step 1535
+[03/07/2022 - 07:16:45] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:17:04] File "/root/Devign/trainer.py", line 216        Step 1663
+[03/07/2022 - 07:17:04] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:17:24] File "/root/Devign/trainer.py", line 216        Step 1791
+[03/07/2022 - 07:17:24] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:17:44] File "/root/Devign/trainer.py", line 216        Step 1919
+[03/07/2022 - 07:17:44] File "/root/Devign/trainer.py", line 217        ====================================================================================================
+[03/07/2022 - 07:18:24] File "/root/Devign/trainer.py", line 235        models/reveal_devign_all4/GGNNSumModel  Test Accuracy: 92.51    Precision: 79.60        Recall: 24.30   F1: 37.24
+[03/07/2022 - 07:18:24] File "/root/Devign/trainer.py", line 236        ====================================================================================================
+/opt/conda/envs/devign/lib/python3.8/site-packages/dgl/base.py:45: DGLWarning: Recommend creating graphs by `dgl.graph(data)` instead of `dgl.DGLGraph(data)`.
+  return warnings.warn(message, category=category, stacklevel=1)
+testing result: 51.35401280157558 59.79381443298969 2.9072681704260654 5.544933078393881
+neg testing result: [51.35401280157558, 51.147540983606554, 98.11320754716981, 6724.137931034483]

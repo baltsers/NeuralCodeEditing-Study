@@ -1,0 +1,980 @@
+sequencer-test.sh start
+Starting test data translation
+[2021-06-11 18:27:51,149 INFO] Translating shard 0.
+sequencer-test.sh done
+
+sequencer-test.sh start
+Starting test data translation
+[2021-06-12 10:24:41,882 INFO] Translating shard 0.
+sequencer-test.sh done
+
+sequencer-test.sh start
+Starting test data translation
+[2021-06-13 18:25:27,867 INFO] Translating shard 0.
+sequencer-test.sh done
+
+sequencer-test.sh start
+Starting test data translation
+[2021-06-13 18:47:39,986 INFO] Translating shard 0.
+./translate.sh: line 4: 261290 Killed                  python translate.py -model $data_path/final-model_step_3000.pt -src $data_path/src-test.txt -beam_size 50 -n_best 50 -output $data_path/pred-test_beam50_3000.txt -dynamic_dict 2>&1 > $data_path/translate50_3000.out
+sequencer-test.sh done
+
+sequencer-test.sh start
+Starting test data translation
+[2021-06-13 18:51:30,718 INFO] Translating shard 0.
+sequencer-test.sh start
+Starting test data translation
+[2021-06-13 18:59:33,636 INFO] Translating shard 0.
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/bigvul_holdout/final.train*.pt, to avoid overwriting them!
+Starting training
+./train.sh: line 16: 4114658 Killed                  python train.py -data $data_path/final -encoder_type brnn -enc_layers 2 -decoder_type rnn -dec_layers 2 -rnn_size 256 -global_attention general -batch_size 1 -word_vec_size 256 -bridge -copy_attn -reuse_copy_attn -train_steps 2000 -gpu_ranks 0 -save_checkpoint_steps 50 -save_model $data_path/final-model > $data_path/train.final.out 2> train_res.txt
+sequencer-train.sh done
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/bigvul_holdout/final.train*.pt, to avoid overwriting them!
+Starting training
+./train.sh: line 16: t/root/Sequencer/chai/bigvul_holdout/train_res.txt: No such file or directory
+sequencer-train.sh done
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/bigvul_holdout/final.train*.pt, to avoid overwriting them!
+Starting training
+./train.sh: line 16: t/root/Sequencer/chai/bigvul_holdout/train_res.txt: No such file or directory
+sequencer-train.sh done
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/bigvul_holdout/final.train*.pt, to avoid overwriting them!
+Starting training
+./translate.sh: line 4: 723434 Killed                  python translate.py -model $data_path/final-model_step_7000.pt -src $data_path/src-test.txt -beam_size 50 -n_best 50 -output $data_path/pred-test_beam50.txt -dynamic_dict 2>&1 > $data_path/translate50.out
+sequencer-test.sh done
+
+./translate.sh: line 4: 2343035 Killed                  python translate.py -model $data_path/final-model_step_7000.pt -src $data_path/src-test.txt -beam_size 50 -n_best 50 -output $data_path/pred-test_beam50.txt -dynamic_dict 2>&1 > $data_path/translate50.out
+sequencer-test.sh done
+
+sequencer-test.sh start
+Starting test data translation
+[2021-06-13 19:26:28,403 INFO] Translating shard 0.
+sequencer-test.sh start
+Starting test data translation
+[2021-06-13 19:26:42,502 INFO] Translating shard 0.
+./translate.sh: line 4: 370313 Killed                  python translate.py -model $data_path/final-model_step_7000.pt -src $data_path/src-test.txt -beam_size 10 -n_best 10 -output $data_path/pred-test_beam10.txt -dynamic_dict 2>&1 > $data_path/translate10.out
+sequencer-test.sh done
+
+./translate.sh: line 4: 260329 Killed                  python translate.py -model $data_path/final-model_step_7000.pt -src $data_path/src-test.txt -beam_size 10 -n_best 10 -output $data_path/pred-test_beam10.txt -dynamic_dict 2>&1 > $data_path/translate10.out
+sequencer-test.sh done
+
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/full_sard/final.train*.pt, to avoid overwriting them!
+Starting training
+[2021-06-13 19:33:37,524 INFO]  * src vocab size = 2460
+[2021-06-13 19:33:37,524 INFO]  * tgt vocab size = 2460
+[2021-06-13 19:33:37,524 INFO] Building model...
+[2021-06-13 19:33:39,187 INFO] NMTModel(
+  (encoder): RNNEncoder(
+    (embeddings): Embeddings(
+      (make_embedding): Sequential(
+        (emb_luts): Elementwise(
+          (0): Embedding(2460, 256, padding_idx=1)
+        )
+      )
+    )
+    (rnn): LSTM(256, 128, num_layers=2, dropout=0.3, bidirectional=True)
+    (bridge): ModuleList(
+      (0): Linear(in_features=256, out_features=256, bias=True)
+      (1): Linear(in_features=256, out_features=256, bias=True)
+    )
+  )
+  (decoder): InputFeedRNNDecoder(
+    (embeddings): Embeddings(
+      (make_embedding): Sequential(
+        (emb_luts): Elementwise(
+          (0): Embedding(2460, 256, padding_idx=1)
+        )
+      )
+    )
+    (dropout): Dropout(p=0.3, inplace=False)
+    (rnn): StackedLSTM(
+      (dropout): Dropout(p=0.3, inplace=False)
+      (layers): ModuleList(
+        (0): LSTMCell(512, 256)
+        (1): LSTMCell(256, 256)
+      )
+    )
+    (attn): GlobalAttention(
+      (linear_in): Linear(in_features=256, out_features=256, bias=False)
+      (linear_out): Linear(in_features=512, out_features=256, bias=False)
+    )
+  )
+  (generator): CopyGenerator(
+    (linear): Linear(in_features=256, out_features=2460, bias=True)
+    (linear_copy): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+[2021-06-13 19:33:39,187 INFO] encoder: 1551872
+[2021-06-13 19:33:39,187 INFO] decoder: 2773661
+[2021-06-13 19:33:39,187 INFO] * number of parameters: 4325533
+[2021-06-13 19:33:39,188 INFO] Starting training on GPU: [0]
+[2021-06-13 19:33:39,188 INFO] Start training loop and validate every 10000 steps...
+[2021-06-13 19:33:39,188 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-13 19:33:44,380 INFO] number of examples: 31041
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/iterator.py:48: UserWarning: OrderedIterator class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/batch.py:23: UserWarning: Batch class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/field.py:356: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  var = torch.tensor(arr, dtype=self.dtype, device=device)
+[2021-06-13 19:33:44,477 INFO] iter: 0
+[2021-06-13 19:33:45,390 INFO] iter: 1
+[2021-06-13 19:33:45,992 INFO] iter: 2
+[2021-06-13 19:33:46,426 INFO] iter: 3
+[2021-06-13 19:33:47,292 INFO] iter: 4
+[2021-06-13 19:33:47,655 INFO] iter: 5
+[2021-06-13 19:33:47,810 INFO] iter: 6
+[2021-06-13 19:33:48,038 INFO] iter: 7
+[2021-06-13 19:33:48,400 INFO] iter: 8
+[2021-06-13 19:33:48,730 INFO] iter: 9
+[2021-06-13 19:33:49,689 INFO] iter: 10
+[2021-06-13 19:33:49,841 INFO] iter: 11
+[2021-06-13 19:33:50,045 INFO] iter: 12
+[2021-06-13 19:33:50,447 INFO] iter: 13
+[2021-06-13 19:33:50,769 INFO] iter: 14
+[2021-06-13 19:33:51,819 INFO] iter: 15
+[2021-06-13 19:33:52,513 INFO] iter: 16
+[2021-06-13 19:33:53,462 INFO] iter: 17
+[2021-06-13 19:33:53,871 INFO] iter: 18
+[2021-06-13 19:33:54,256 INFO] iter: 19
+[2021-06-13 19:33:55,606 INFO] iter: 20
+[2021-06-13 19:33:55,939 INFO] iter: 21
+[2021-06-13 19:33:56,196 INFO] iter: 22
+[2021-06-13 19:33:56,758 INFO] iter: 23
+[2021-06-13 19:33:57,303 INFO] iter: 24
+[2021-06-13 19:33:58,369 INFO] iter: 25
+[2021-06-13 19:33:58,713 INFO] iter: 26
+[2021-06-13 19:33:59,053 INFO] iter: 27
+[2021-06-13 19:33:59,408 INFO] iter: 28
+[2021-06-13 19:33:59,682 INFO] iter: 29
+[2021-06-13 19:34:00,171 INFO] iter: 30
+[2021-06-13 19:34:00,530 INFO] iter: 31
+[2021-06-13 19:34:00,814 INFO] iter: 32
+[2021-06-13 19:34:02,326 INFO] iter: 33
+[2021-06-13 19:34:03,129 INFO] iter: 34
+[2021-06-13 19:34:03,349 INFO] iter: 35
+[2021-06-13 19:34:04,047 INFO] iter: 36
+[2021-06-13 19:34:04,434 INFO] iter: 37
+[2021-06-13 19:34:04,849 INFO] iter: 38
+[2021-06-13 19:34:05,811 INFO] iter: 39
+[2021-06-13 19:34:06,039 INFO] iter: 40
+[2021-06-13 19:34:06,828 INFO] iter: 41
+[2021-06-13 19:34:07,017 INFO] iter: 42
+[2021-06-13 19:34:07,305 INFO] iter: 43
+[2021-06-13 19:34:07,602 INFO] iter: 44
+[2021-06-13 19:34:07,861 INFO] iter: 45
+[2021-06-13 19:34:08,089 INFO] iter: 46
+[2021-06-13 19:34:08,317 INFO] iter: 47
+[2021-06-13 19:34:08,710 INFO] iter: 48
+[2021-06-13 19:34:09,530 INFO] iter: 49
+[2021-06-13 19:34:09,684 INFO] Step 50/20000; acc:  10.76; ppl: 279.61; xent: 5.63; lr: 1.00000; 7711/8315 tok/s;     30 sec
+[2021-06-13 19:34:09,709 INFO] iter: 50
+[2021-06-13 19:34:10,654 INFO] iter: 51
+[2021-06-13 19:34:11,377 INFO] iter: 52
+[2021-06-13 19:34:11,631 INFO] iter: 53
+[2021-06-13 19:34:11,862 INFO] iter: 54
+[2021-06-13 19:34:12,182 INFO] iter: 55
+[2021-06-13 19:34:12,513 INFO] iter: 56
+[2021-06-13 19:34:13,406 INFO] iter: 57
+[2021-06-13 19:34:14,682 INFO] iter: 58
+[2021-06-13 19:34:14,999 INFO] iter: 59
+[2021-06-13 19:34:15,347 INFO] iter: 60
+[2021-06-13 19:34:16,177 INFO] iter: 61
+[2021-06-13 19:34:16,631 INFO] iter: 62
+[2021-06-13 19:34:16,890 INFO] iter: 63
+[2021-06-13 19:34:17,410 INFO] iter: 64
+[2021-06-13 19:34:19,028 INFO] iter: 65
+[2021-06-13 19:34:19,249 INFO] iter: 66
+[2021-06-13 19:34:19,499 INFO] iter: 67
+[2021-06-13 19:34:20,031 INFO] iter: 68
+[2021-06-13 19:34:22,002 INFO] iter: 69
+[2021-06-13 19:34:22,329 INFO] iter: 70
+[2021-06-13 19:34:22,617 INFO] iter: 71
+[2021-06-13 19:34:22,925 INFO] iter: 72
+[2021-06-13 19:34:23,558 INFO] iter: 73
+[2021-06-13 19:34:23,993 INFO] iter: 74
+[2021-06-13 19:34:24,306 INFO] iter: 75
+[2021-06-13 19:34:24,808 INFO] iter: 76
+[2021-06-13 19:34:25,644 INFO] iter: 77
+[2021-06-13 19:34:26,075 INFO] iter: 78
+[2021-06-13 19:34:26,742 INFO] iter: 79
+[2021-06-13 19:34:26,956 INFO] iter: 80
+[2021-06-13 19:34:28,026 INFO] iter: 81
+[2021-06-13 19:34:28,422 INFO] iter: 82
+[2021-06-13 19:34:29,011 INFO] iter: 83
+[2021-06-13 19:34:29,630 INFO] iter: 84
+[2021-06-13 19:34:29,833 INFO] iter: 85
+[2021-06-13 19:34:30,058 INFO] iter: 86
+[2021-06-13 19:34:30,339 INFO] iter: 87
+[2021-06-13 19:34:30,534 INFO] iter: 88
+[2021-06-13 19:34:30,798 INFO] iter: 89
+[2021-06-13 19:34:31,736 INFO] iter: 90
+[2021-06-13 19:34:32,054 INFO] iter: 91
+[2021-06-13 19:34:32,249 INFO] iter: 92
+[2021-06-13 19:34:32,506 INFO] iter: 93
+[2021-06-13 19:34:32,843 INFO] iter: 94
+[2021-06-13 19:34:33,026 INFO] iter: 95
+[2021-06-13 19:34:33,287 INFO] iter: 96
+[2021-06-13 19:34:34,380 INFO] iter: 97
+[2021-06-13 19:34:34,695 INFO] iter: 98
+[2021-06-13 19:34:35,925 INFO] iter: 99
+[2021-06-13 19:34:36,154 INFO] Step 100/20000; acc:  11.95; ppl: 329.16; xent: 5.80; lr: 1.00000; 8974/9856 tok/s;     57 sec
+[2021-06-13 19:34:36,174 INFO] iter: 100
+[2021-06-13 19:34:36,472 INFO] iter: 101
+[2021-06-13 19:34:36,840 INFO] iter: 102
+[2021-06-13 19:34:37,236 INFO] iter: 103
+[2021-06-13 19:34:37,590 INFO] iter: 104
+[2021-06-13 19:34:38,066 INFO] iter: 105
+[2021-06-13 19:34:38,453 INFO] iter: 106
+[2021-06-13 19:34:39,423 INFO] iter: 107
+[2021-06-13 19:34:39,648 INFO] iter: 108
+[2021-06-13 19:34:40,050 INFO] iter: 109
+[2021-06-13 19:34:40,316 INFO] iter: 110
+[2021-06-13 19:34:40,711 INFO] iter: 111
+[2021-06-13 19:34:41,165 INFO] iter: 112
+[2021-06-13 19:34:42,093 INFO] iter: 113
+[2021-06-13 19:34:42,578 INFO] iter: 114
+[2021-06-13 19:34:42,818 INFO] iter: 115
+[2021-06-13 19:34:43,011 INFO] iter: 116
+[2021-06-13 19:34:43,883 INFO] iter: 117
+[2021-06-13 19:34:44,927 INFO] iter: 118
+[2021-06-13 19:34:45,138 INFO] iter: 119
+[2021-06-13 19:34:46,002 INFO] iter: 120
+[2021-06-13 19:34:46,930 INFO] iter: 121
+[2021-06-13 19:34:47,223 INFO] iter: 122
+[2021-06-13 19:34:47,416 INFO] iter: 123
+[2021-06-13 19:34:47,738 INFO] iter: 124
+[2021-06-13 19:34:48,751 INFO] iter: 125
+[2021-06-13 19:34:49,700 INFO] iter: 126
+[2021-06-13 19:34:50,496 INFO] iter: 127
+[2021-06-13 19:34:51,783 INFO] iter: 128
+[2021-06-13 19:34:51,981 INFO] iter: 129
+[2021-06-13 19:34:52,225 INFO] iter: 130
+[2021-06-13 19:34:52,638 INFO] iter: 131
+[2021-06-13 19:34:52,995 INFO] iter: 132
+[2021-06-13 19:34:53,220 INFO] iter: 133
+[2021-06-13 19:34:54,137 INFO] iter: 134
+[2021-06-13 19:34:54,445 INFO] iter: 135
+[2021-06-13 19:34:55,457 INFO] iter: 136
+[2021-06-13 19:34:55,683 INFO] iter: 137
+[2021-06-13 19:34:56,048 INFO] iter: 138
+[2021-06-13 19:34:57,734 INFO] iter: 139
+[2021-06-13 19:34:58,131 INFO] iter: 140
+[2021-06-13 19:34:58,404 INFO] iter: 141
+[2021-06-13 19:34:58,771 INFO] iter: 142
+[2021-06-13 19:34:59,185 INFO] iter: 143
+[2021-06-13 19:34:59,438 INFO] iter: 144
+./train.sh: line 16: 1562925 Killed                  python train.py -data $data_path/final -encoder_type brnn -enc_layers 2 -decoder_type rnn -dec_layers 2 -rnn_size 256 -global_attention general -batch_size 32 -word_vec_size 256 -bridge -copy_attn -reuse_copy_attn -train_steps 20000 -gpu_ranks 0 -save_checkpoint_steps 1000 -save_model $data_path/final-model > $data_path/train.final.out
+sequencer-train.sh done
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/full_sard/final.train*.pt, to avoid overwriting them!
+Starting training
+[2021-06-13 19:35:38,074 INFO]  * src vocab size = 2460
+[2021-06-13 19:35:38,074 INFO]  * tgt vocab size = 2460
+[2021-06-13 19:35:38,075 INFO] Building model...
+[2021-06-13 19:35:39,641 INFO] NMTModel(
+  (encoder): RNNEncoder(
+    (embeddings): Embeddings(
+      (make_embedding): Sequential(
+        (emb_luts): Elementwise(
+          (0): Embedding(2460, 256, padding_idx=1)
+        )
+      )
+    )
+    (rnn): LSTM(256, 128, num_layers=2, dropout=0.3, bidirectional=True)
+    (bridge): ModuleList(
+      (0): Linear(in_features=256, out_features=256, bias=True)
+      (1): Linear(in_features=256, out_features=256, bias=True)
+    )
+  )
+  (decoder): InputFeedRNNDecoder(
+    (embeddings): Embeddings(
+      (make_embedding): Sequential(
+        (emb_luts): Elementwise(
+          (0): Embedding(2460, 256, padding_idx=1)
+        )
+      )
+    )
+    (dropout): Dropout(p=0.3, inplace=False)
+    (rnn): StackedLSTM(
+      (dropout): Dropout(p=0.3, inplace=False)
+      (layers): ModuleList(
+        (0): LSTMCell(512, 256)
+        (1): LSTMCell(256, 256)
+      )
+    )
+    (attn): GlobalAttention(
+      (linear_in): Linear(in_features=256, out_features=256, bias=False)
+      (linear_out): Linear(in_features=512, out_features=256, bias=False)
+    )
+  )
+  (generator): CopyGenerator(
+    (linear): Linear(in_features=256, out_features=2460, bias=True)
+    (linear_copy): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+[2021-06-13 19:35:39,641 INFO] encoder: 1551872
+[2021-06-13 19:35:39,642 INFO] decoder: 2773661
+[2021-06-13 19:35:39,642 INFO] * number of parameters: 4325533
+[2021-06-13 19:35:39,642 INFO] Starting training on GPU: [0]
+[2021-06-13 19:35:39,642 INFO] Start training loop and validate every 10000 steps...
+[2021-06-13 19:35:39,642 INFO] Loading dataset from /root/Sequencer/chai/full_sard/final.train.0.pt
+[2021-06-13 19:35:44,694 INFO] number of examples: 31041
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/iterator.py:48: UserWarning: OrderedIterator class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/batch.py:23: UserWarning: Batch class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/field.py:356: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  var = torch.tensor(arr, dtype=self.dtype, device=device)
+[2021-06-13 19:35:44,797 INFO] iter: 0
+[2021-06-13 19:35:45,799 INFO] iter: 1
+[2021-06-13 19:35:46,671 INFO] iter: 2
+[2021-06-13 19:35:46,875 INFO] iter: 3
+[2021-06-13 19:35:47,755 INFO] iter: 4
+[2021-06-13 19:35:47,963 INFO] iter: 5
+[2021-06-13 19:35:48,173 INFO] iter: 6
+[2021-06-13 19:35:49,068 INFO] iter: 7
+[2021-06-13 19:35:49,429 INFO] iter: 8
+[2021-06-13 19:35:49,654 INFO] iter: 9
+[2021-06-13 19:35:49,815 INFO] iter: 10
+[2021-06-13 19:35:50,120 INFO] iter: 11
+[2021-06-13 19:35:50,583 INFO] iter: 12
+[2021-06-13 19:35:50,775 INFO] iter: 13
+[2021-06-13 19:35:51,215 INFO] iter: 14
+[2021-06-13 19:35:51,811 INFO] iter: 15
+[2021-06-13 19:35:53,486 INFO] iter: 16
+[2021-06-13 19:35:54,516 INFO] iter: 17
+[2021-06-13 19:35:55,541 INFO] iter: 18
+[2021-06-13 19:35:56,080 INFO] iter: 19
+[2021-06-13 19:35:56,609 INFO] iter: 20
+[2021-06-13 19:35:56,949 INFO] iter: 21
+[2021-06-13 19:35:57,332 INFO] iter: 22
+[2021-06-13 19:35:57,712 INFO] iter: 23
+[2021-06-13 19:35:58,038 INFO] iter: 24
+[2021-06-13 19:35:58,884 INFO] iter: 25
+[2021-06-13 19:35:59,564 INFO] iter: 26
+[2021-06-13 19:35:59,866 INFO] iter: 27
+[2021-06-13 19:36:00,073 INFO] iter: 28
+[2021-06-13 19:36:00,494 INFO] iter: 29
+[2021-06-13 19:36:01,965 INFO] iter: 30
+[2021-06-13 19:36:02,280 INFO] iter: 31
+[2021-06-13 19:36:03,042 INFO] iter: 32
+[2021-06-13 19:36:03,905 INFO] iter: 33
+[2021-06-13 19:36:04,155 INFO] iter: 34
+[2021-06-13 19:36:04,834 INFO] iter: 35
+[2021-06-13 19:36:05,071 INFO] iter: 36
+[2021-06-13 19:36:05,384 INFO] iter: 37
+[2021-06-13 19:36:05,751 INFO] iter: 38
+[2021-06-13 19:36:06,747 INFO] iter: 39
+[2021-06-13 19:36:06,988 INFO] iter: 40
+[2021-06-13 19:36:07,221 INFO] iter: 41
+[2021-06-13 19:36:07,703 INFO] iter: 42
+[2021-06-13 19:36:08,526 INFO] iter: 43
+[2021-06-13 19:36:08,825 INFO] iter: 44
+[2021-06-13 19:36:09,104 INFO] iter: 45
+[2021-06-13 19:36:09,313 INFO] iter: 46
+[2021-06-13 19:36:09,522 INFO] iter: 47
+[2021-06-13 19:36:09,723 INFO] iter: 48
+[2021-06-13 19:36:09,943 INFO] iter: 49
+[2021-06-13 19:36:10,464 INFO] Step 50/20000; acc:   8.88; ppl: 243.72; xent: 5.50; lr: 1.00000; 6894/7667 tok/s;     31 sec
+[2021-06-13 19:36:10,531 INFO] iter: 50
+[2021-06-13 19:36:11,449 INFO] iter: 51
+[2021-06-13 19:36:11,841 INFO] iter: 52
+[2021-06-13 19:36:12,109 INFO] iter: 53
+[2021-06-13 19:36:12,387 INFO] iter: 54
+[2021-06-13 19:36:12,732 INFO] iter: 55
+[2021-06-13 19:36:12,977 INFO] iter: 56
+[2021-06-13 19:36:13,240 INFO] iter: 57
+[2021-06-13 19:36:14,149 INFO] iter: 58
+[2021-06-13 19:36:14,413 INFO] iter: 59
+[2021-06-13 19:36:14,670 INFO] iter: 60
+[2021-06-13 19:36:14,884 INFO] iter: 61
+[2021-06-13 19:36:15,140 INFO] iter: 62
+[2021-06-13 19:36:15,695 INFO] iter: 63
+[2021-06-13 19:36:16,116 INFO] iter: 64
+[2021-06-13 19:36:17,408 INFO] iter: 65
+[2021-06-13 19:36:17,610 INFO] iter: 66
+[2021-06-13 19:36:18,044 INFO] iter: 67
+[2021-06-13 19:36:18,259 INFO] iter: 68
+[2021-06-13 19:36:18,647 INFO] iter: 69
+[2021-06-13 19:36:19,498 INFO] iter: 70
+[2021-06-13 19:36:19,689 INFO] iter: 71
+[2021-06-13 19:36:20,143 INFO] iter: 72
+[2021-06-13 19:36:20,500 INFO] iter: 73
+[2021-06-13 19:36:20,746 INFO] iter: 74
+[2021-06-13 19:36:21,199 INFO] iter: 75
+[2021-06-13 19:36:21,507 INFO] iter: 76
+[2021-06-13 19:36:21,919 INFO] iter: 77
+[2021-06-13 19:36:23,938 INFO] iter: 78
+[2021-06-13 19:36:24,282 INFO] iter: 79
+[2021-06-13 19:36:24,520 INFO] iter: 80
+[2021-06-13 19:36:25,426 INFO] iter: 81
+[2021-06-13 19:36:25,667 INFO] iter: 82
+[2021-06-13 19:36:25,985 INFO] iter: 83
+[2021-06-13 19:36:26,363 INFO] iter: 84
+[2021-06-13 19:36:26,567 INFO] iter: 85
+[2021-06-13 19:36:27,260 INFO] iter: 86
+[2021-06-13 19:36:27,496 INFO] iter: 87
+[2021-06-13 19:36:27,960 INFO] iter: 88
+[2021-06-13 19:36:28,842 INFO] iter: 89
+[2021-06-13 19:36:29,179 INFO] iter: 90
+[2021-06-13 19:36:29,445 INFO] iter: 91
+[2021-06-13 19:36:29,725 INFO] iter: 92
+[2021-06-13 19:36:29,943 INFO] iter: 93
+[2021-06-13 19:36:30,220 INFO] iter: 94
+[2021-06-13 19:36:30,494 INFO] iter: 95
+[2021-06-13 19:36:31,493 INFO] iter: 96
+[2021-06-13 19:36:31,880 INFO] iter: 97
+[2021-06-13 19:36:32,090 INFO] iter: 98
+[2021-06-13 19:36:32,430 INFO] iter: 99
+[2021-06-13 19:36:33,835 INFO] Step 100/20000; acc:  11.15; ppl: 90.21; xent: 4.50; lr: 1.00000; 11481/10865 tok/s;     54 sec
+[2021-06-13 19:36:33,864 INFO] iter: 100
+[2021-06-13 19:36:34,279 INFO] iter: 101
+[2021-06-13 19:36:34,477 INFO] iter: 102
+[2021-06-13 19:36:34,752 INFO] iter: 103
+[2021-06-13 19:36:35,127 INFO] iter: 104
+[2021-06-13 19:36:35,568 INFO] iter: 105
+[2021-06-13 19:36:35,994 INFO] iter: 106
+[2021-06-13 19:36:36,419 INFO] iter: 107
+[2021-06-13 19:36:37,174 INFO] iter: 108
+[2021-06-13 19:36:37,329 INFO] iter: 109
+[2021-06-13 19:36:37,561 INFO] iter: 110
+[2021-06-13 19:36:38,049 INFO] iter: 111
+[2021-06-13 19:36:38,387 INFO] iter: 112
+[2021-06-13 19:36:38,906 INFO] iter: 113
+[2021-06-13 19:36:39,958 INFO] iter: 114
+[2021-06-13 19:36:40,383 INFO] iter: 115
+[2021-06-13 19:36:41,372 INFO] iter: 116
+[2021-06-13 19:36:41,644 INFO] iter: 117
+[2021-06-13 19:36:42,637 INFO] iter: 118
+[2021-06-13 19:36:42,976 INFO] iter: 119
+[2021-06-13 19:36:43,380 INFO] iter: 120
+[2021-06-13 19:36:43,980 INFO] iter: 121
+[2021-06-13 19:36:44,289 INFO] iter: 122
+[2021-06-13 19:36:44,745 INFO] iter: 123
+[2021-06-13 19:36:45,539 INFO] iter: 124
+[2021-06-13 19:36:45,873 INFO] iter: 125
+[2021-06-13 19:36:46,209 INFO] iter: 126
+[2021-06-13 19:36:46,955 INFO] iter: 127
+[2021-06-13 19:36:47,699 INFO] iter: 128
+[2021-06-13 19:36:47,983 INFO] iter: 129
+[2021-06-13 19:36:48,387 INFO] iter: 130
+[2021-06-13 19:36:48,796 INFO] iter: 131
+[2021-06-13 19:36:49,014 INFO] iter: 132
+[2021-06-13 19:36:49,480 INFO] iter: 133
+[2021-06-13 19:36:50,378 INFO] iter: 134
+[2021-06-13 19:36:50,582 INFO] iter: 135
+[2021-06-13 19:36:50,791 INFO] iter: 136
+[2021-06-13 19:36:51,220 INFO] iter: 137
+[2021-06-13 19:36:52,092 INFO] iter: 138
+[2021-06-13 19:36:52,977 INFO] iter: 139
+[2021-06-13 19:36:53,284 INFO] iter: 140
+[2021-06-13 19:36:53,582 INFO] iter: 141
+[2021-06-13 19:36:53,810 INFO] iter: 142
+[2021-06-13 19:36:54,053 INFO] iter: 143
+[2021-06-13 19:36:54,463 INFO] iter: 144
+[2021-06-13 19:36:54,773 INFO] iter: 145
+[2021-06-13 19:36:55,178 INFO] iter: 146
+[2021-06-13 19:36:55,354 INFO] iter: 147
+[2021-06-13 19:36:55,758 INFO] iter: 148
+[2021-06-13 19:36:56,095 INFO] iter: 149
+[2021-06-13 19:36:56,383 INFO] Step 150/20000; acc:  18.88; ppl: 30.68; xent: 3.42; lr: 1.00000; 10754/10744 tok/s;     77 sec
+[2021-06-13 19:36:56,409 INFO] iter: 150
+[2021-06-13 19:36:56,667 INFO] iter: 151
+[2021-06-13 19:36:57,720 INFO] iter: 152
+[2021-06-13 19:36:58,632 INFO] iter: 153
+[2021-06-13 19:36:58,785 INFO] iter: 154
+[2021-06-13 19:36:59,130 INFO] iter: 155
+[2021-06-13 19:36:59,345 INFO] iter: 156
+[2021-06-13 19:36:59,746 INFO] iter: 157
+[2021-06-13 19:36:59,859 INFO] iter: 158
+[2021-06-13 19:37:00,089 INFO] iter: 159
+[2021-06-13 19:37:00,317 INFO] iter: 160
+[2021-06-13 19:37:00,550 INFO] iter: 161
+[2021-06-13 19:37:00,877 INFO] iter: 162
+[2021-06-13 19:37:01,894 INFO] iter: 163
+[2021-06-13 19:37:02,206 INFO] iter: 164
+[2021-06-13 19:37:02,826 INFO] iter: 165
+[2021-06-13 19:37:03,127 INFO] iter: 166
+[2021-06-13 19:37:04,072 INFO] iter: 167
+[2021-06-13 19:37:04,282 INFO] iter: 168
+[2021-06-13 19:37:05,087 INFO] iter: 169
+[2021-06-13 19:37:05,820 INFO] iter: 170
+[2021-06-13 19:37:06,001 INFO] iter: 171
+[2021-06-13 19:37:06,244 INFO] iter: 172
+[2021-06-13 19:37:06,548 INFO] iter: 173
+[2021-06-13 19:37:07,489 INFO] iter: 174
+[2021-06-13 19:37:08,411 INFO] iter: 175
+[2021-06-13 19:37:08,860 INFO] iter: 176
+[2021-06-13 19:37:09,168 INFO] iter: 177
+[2021-06-13 19:37:09,500 INFO] iter: 178
+[2021-06-13 19:37:09,653 INFO] iter: 179
+[2021-06-13 19:37:09,864 INFO] iter: 180
+[2021-06-13 19:37:10,153 INFO] iter: 181
+[2021-06-13 19:37:10,380 INFO] iter: 182
+[2021-06-13 19:37:10,692 INFO] iter: 183
+[2021-06-13 19:37:10,851 INFO] iter: 184
+[2021-06-13 19:37:11,101 INFO] iter: 185
+[2021-06-13 19:37:11,473 INFO] iter: 186
+[2021-06-13 19:37:11,718 INFO] iter: 187
+[2021-06-13 19:37:12,051 INFO] iter: 188
+[2021-06-13 19:37:12,188 INFO] iter: 189
+[2021-06-13 19:37:12,546 INFO] iter: 190
+[2021-06-13 19:37:12,824 INFO] iter: 191
+[2021-06-13 19:37:14,291 INFO] iter: 192
+[2021-06-13 19:37:14,497 INFO] iter: 193
+[2021-06-13 19:37:14,818 INFO] iter: 194
+[2021-06-13 19:37:14,982 INFO] iter: 195
+[2021-06-13 19:37:15,162 INFO] iter: 196
+[2021-06-13 19:37:15,390 INFO] iter: 197
+[2021-06-13 19:37:15,597 INFO] iter: 198
+[2021-06-13 19:37:16,034 INFO] iter: 199
+[2021-06-13 19:37:16,333 INFO] Step 200/20000; acc:  31.20; ppl: 19.98; xent: 2.99; lr: 1.00000; 9235/9953 tok/s;     97 sec
+[2021-06-13 19:37:16,358 INFO] iter: 200
+[2021-06-13 19:37:16,652 INFO] iter: 201
+[2021-06-13 19:37:17,076 INFO] iter: 202
+[2021-06-13 19:37:17,270 INFO] iter: 203
+[2021-06-13 19:37:17,604 INFO] iter: 204
+[2021-06-13 19:37:18,377 INFO] iter: 205
+[2021-06-13 19:37:19,106 INFO] iter: 206
+[2021-06-13 19:37:19,453 INFO] iter: 207
+[2021-06-13 19:37:19,638 INFO] iter: 208
+[2021-06-13 19:37:20,168 INFO] iter: 209
+[2021-06-13 19:37:20,628 INFO] iter: 210
+[2021-06-13 19:37:20,951 INFO] iter: 211
+[2021-06-13 19:37:21,245 INFO] iter: 212
+[2021-06-13 19:37:21,536 INFO] iter: 213
+[2021-06-13 19:37:21,967 INFO] iter: 214
+[2021-06-13 19:37:23,066 INFO] iter: 215
+[2021-06-13 19:37:23,423 INFO] iter: 216
+[2021-06-13 19:37:24,087 INFO] iter: 217
+[2021-06-13 19:37:24,820 INFO] iter: 218
+[2021-06-13 19:37:25,734 INFO] iter: 219
+[2021-06-13 19:37:26,581 INFO] iter: 220
+[2021-06-13 19:37:26,991 INFO] iter: 221
+[2021-06-13 19:37:28,035 INFO] iter: 222
+[2021-06-13 19:37:28,288 INFO] iter: 223
+[2021-06-13 19:37:28,624 INFO] iter: 224
+[2021-06-13 19:37:28,982 INFO] iter: 225
+[2021-06-13 19:37:29,831 INFO] iter: 226
+[2021-06-13 19:37:30,307 INFO] iter: 227
+[2021-06-13 19:37:30,527 INFO] iter: 228
+[2021-06-13 19:37:30,986 INFO] iter: 229
+[2021-06-13 19:37:31,360 INFO] iter: 230
+[2021-06-13 19:37:32,613 INFO] iter: 231
+[2021-06-13 19:37:33,526 INFO] iter: 232
+[2021-06-13 19:37:33,740 INFO] iter: 233
+[2021-06-13 19:37:34,051 INFO] iter: 234
+[2021-06-13 19:37:34,389 INFO] iter: 235
+[2021-06-13 19:37:35,052 INFO] iter: 236
+[2021-06-13 19:37:35,892 INFO] iter: 237
+[2021-06-13 19:37:36,171 INFO] iter: 238
+[2021-06-13 19:37:36,867 INFO] iter: 239
+[2021-06-13 19:37:37,186 INFO] iter: 240
+[2021-06-13 19:37:37,400 INFO] iter: 241
+[2021-06-13 19:37:37,659 INFO] iter: 242
+[2021-06-13 19:37:37,850 INFO] iter: 243
+[2021-06-13 19:37:38,064 INFO] iter: 244
+[2021-06-13 19:37:38,707 INFO] iter: 245
+[2021-06-13 19:37:39,407 INFO] iter: 246
+[2021-06-13 19:37:40,395 INFO] iter: 247
+[2021-06-13 19:37:41,483 INFO] iter: 248
+[2021-06-13 19:37:42,759 INFO] iter: 249
+[2021-06-13 19:37:42,995 INFO] Step 250/20000; acc:  42.33; ppl: 10.15; xent: 2.32; lr: 1.00000; 8860/9425 tok/s;    123 sec
+[2021-06-13 19:37:43,025 INFO] iter: 250
+[2021-06-13 19:37:43,417 INFO] iter: 251
+[2021-06-13 19:37:43,559 INFO] iter: 252
+[2021-06-13 19:37:43,925 INFO] iter: 253
+[2021-06-13 19:37:44,171 INFO] iter: 254
+[2021-06-13 19:37:44,474 INFO] iter: 255
+[2021-06-13 19:37:44,693 INFO] iter: 256
+[2021-06-13 19:37:45,588 INFO] iter: 257
+[2021-06-13 19:37:45,838 INFO] iter: 258
+[2021-06-13 19:37:46,755 INFO] iter: 259
+[2021-06-13 19:37:48,378 INFO] iter: 260
+[2021-06-13 19:37:48,614 INFO] iter: 261
+[2021-06-13 19:37:48,926 INFO] iter: 262
+[2021-06-13 19:37:49,481 INFO] iter: 263
+[2021-06-13 19:37:49,667 INFO] iter: 264
+[2021-06-13 19:37:49,866 INFO] iter: 265
+[2021-06-13 19:37:50,809 INFO] iter: 266
+[2021-06-13 19:37:51,043 INFO] iter: 267
+[2021-06-13 19:37:51,415 INFO] iter: 268
+[2021-06-13 19:37:52,124 INFO] iter: 269
+[2021-06-13 19:37:54,091 INFO] iter: 270
+[2021-06-13 19:37:54,342 INFO] iter: 271
+[2021-06-13 19:37:54,626 INFO] iter: 272
+[2021-06-13 19:37:55,564 INFO] iter: 273
+[2021-06-13 19:37:55,748 INFO] iter: 274
+[2021-06-13 19:37:55,931 INFO] iter: 275
+[2021-06-13 19:37:56,200 INFO] iter: 276
+[2021-06-13 19:37:57,077 INFO] iter: 277
+[2021-06-13 19:37:58,857 INFO] iter: 278
+[2021-06-13 19:37:59,211 INFO] iter: 279
+[2021-06-13 19:38:00,333 INFO] iter: 280
+[2021-06-13 19:38:00,693 INFO] iter: 281
+[2021-06-13 19:38:01,109 INFO] iter: 282
+[2021-06-13 19:38:01,525 INFO] iter: 283
+[2021-06-13 19:38:01,737 INFO] iter: 284
+[2021-06-13 19:38:02,010 INFO] iter: 285
+[2021-06-13 19:38:02,370 INFO] iter: 286
+[2021-06-13 19:38:03,408 INFO] iter: 287
+[2021-06-13 19:38:04,382 INFO] iter: 288
+[2021-06-13 19:38:04,618 INFO] iter: 289
+[2021-06-13 19:38:05,451 INFO] iter: 290
+[2021-06-13 19:38:05,654 INFO] iter: 291
+[2021-06-13 19:38:06,545 INFO] iter: 292
+[2021-06-13 19:38:06,798 INFO] iter: 293
+[2021-06-13 19:38:07,087 INFO] iter: 294
+[2021-06-13 19:38:07,324 INFO] iter: 295
+[2021-06-13 19:38:07,637 INFO] iter: 296
+[2021-06-13 19:38:07,808 INFO] iter: 297
+[2021-06-13 19:38:07,979 INFO] iter: 298
+[2021-06-13 19:38:08,222 INFO] iter: 299
+[2021-06-13 19:38:08,533 INFO] Step 300/20000; acc:  57.40; ppl:  4.55; xent: 1.52; lr: 1.00000; 10350/10292 tok/s;    149 sec
+[2021-06-13 19:38:08,555 INFO] iter: 300
+[2021-06-13 19:38:08,888 INFO] iter: 301
+[2021-06-13 19:38:09,154 INFO] iter: 302
+[2021-06-13 19:38:09,407 INFO] iter: 303
+[2021-06-13 19:38:09,657 INFO] iter: 304
+[2021-06-13 19:38:09,838 INFO] iter: 305
+[2021-06-13 19:38:10,971 INFO] iter: 306
+[2021-06-13 19:38:11,873 INFO] iter: 307
+[2021-06-13 19:38:12,380 INFO] iter: 308
+[2021-06-13 19:38:12,766 INFO] iter: 309
+[2021-06-13 19:38:13,193 INFO] iter: 310
+[2021-06-13 19:38:13,425 INFO] iter: 311
+[2021-06-13 19:38:13,864 INFO] iter: 312
+[2021-06-13 19:38:14,118 INFO] iter: 313
+[2021-06-13 19:38:14,551 INFO] iter: 314
+[2021-06-13 19:38:14,976 INFO] iter: 315
+[2021-06-13 19:38:15,729 INFO] iter: 316
+[2021-06-13 19:38:16,149 INFO] iter: 317
+[2021-06-13 19:38:16,607 INFO] iter: 318
+[2021-06-13 19:38:17,661 INFO] iter: 319
+[2021-06-13 19:38:17,956 INFO] iter: 320
+[2021-06-13 19:38:18,180 INFO] iter: 321
+[2021-06-13 19:38:18,407 INFO] iter: 322
+[2021-06-13 19:38:19,207 INFO] iter: 323
+[2021-06-13 19:38:19,808 INFO] iter: 324
+[2021-06-13 19:38:19,974 INFO] iter: 325
+[2021-06-13 19:38:20,341 INFO] iter: 326
+[2021-06-13 19:38:20,949 INFO] iter: 327
+[2021-06-13 19:38:21,408 INFO] iter: 328
+[2021-06-13 19:38:21,710 INFO] iter: 329
+[2021-06-13 19:38:22,114 INFO] iter: 330
+[2021-06-13 19:38:23,158 INFO] iter: 331
+[2021-06-13 19:38:23,373 INFO] iter: 332
+[2021-06-13 19:38:23,744 INFO] iter: 333
+[2021-06-13 19:38:24,075 INFO] iter: 334
+[2021-06-13 19:38:24,335 INFO] iter: 335
+[2021-06-13 19:38:24,558 INFO] iter: 336
+[2021-06-13 19:38:24,827 INFO] iter: 337
+[2021-06-13 19:38:25,093 INFO] iter: 338
+[2021-06-13 19:38:25,606 INFO] iter: 339
+[2021-06-13 19:38:26,518 INFO] iter: 340
+[2021-06-13 19:38:26,979 INFO] iter: 341
+[2021-06-13 19:38:27,233 INFO] iter: 342
+[2021-06-13 19:38:27,557 INFO] iter: 343
+[2021-06-13 19:38:28,460 INFO] iter: 344
+[2021-06-13 19:38:28,749 INFO] iter: 345
+[2021-06-13 19:38:29,254 INFO] iter: 346
+[2021-06-13 19:38:29,594 INFO] iter: 347
+[2021-06-13 19:38:30,161 INFO] iter: 348
+[2021-06-13 19:38:31,068 INFO] iter: 349
+[2021-06-13 19:38:31,259 INFO] Step 350/20000; acc:  70.20; ppl:  3.82; xent: 1.34; lr: 1.00000; 10551/11242 tok/s;    172 sec
+[2021-06-13 19:38:31,285 INFO] iter: 350
+[2021-06-13 19:38:31,621 INFO] iter: 351
+[2021-06-13 19:38:32,304 INFO] iter: 352
+[2021-06-13 19:38:32,590 INFO] iter: 353
+[2021-06-13 19:38:32,961 INFO] iter: 354
+[2021-06-13 19:38:33,239 INFO] iter: 355
+[2021-06-13 19:38:33,612 INFO] iter: 356
+[2021-06-13 19:38:33,931 INFO] iter: 357
+[2021-06-13 19:38:34,176 INFO] iter: 358
+[2021-06-13 19:38:34,924 INFO] iter: 359
+[2021-06-13 19:38:35,883 INFO] iter: 360
+[2021-06-13 19:38:36,266 INFO] iter: 361
+[2021-06-13 19:38:37,097 INFO] iter: 362
+[2021-06-13 19:38:37,295 INFO] iter: 363
+[2021-06-13 19:38:37,870 INFO] iter: 364
+[2021-06-13 19:38:38,288 INFO] iter: 365
+[2021-06-13 19:38:38,763 INFO] iter: 366
+[2021-06-13 19:38:39,686 INFO] iter: 367
+[2021-06-13 19:38:39,902 INFO] iter: 368
+[2021-06-13 19:38:40,530 INFO] iter: 369
+[2021-06-13 19:38:40,916 INFO] iter: 370
+[2021-06-13 19:38:41,137 INFO] iter: 371
+[2021-06-13 19:38:41,892 INFO] iter: 372
+[2021-06-13 19:38:42,192 INFO] iter: 373
+[2021-06-13 19:38:42,637 INFO] iter: 374
+[2021-06-13 19:38:43,439 INFO] iter: 375
+[2021-06-13 19:38:43,987 INFO] iter: 376
+[2021-06-13 19:38:44,970 INFO] iter: 377
+[2021-06-13 19:38:45,102 INFO] iter: 378
+[2021-06-13 19:38:45,392 INFO] iter: 379
+[2021-06-13 19:38:45,695 INFO] iter: 380
+[2021-06-13 19:38:46,074 INFO] iter: 381
+[2021-06-13 19:38:46,554 INFO] iter: 382
+[2021-06-13 19:38:46,714 INFO] iter: 383
+[2021-06-13 19:38:46,873 INFO] iter: 384
+[2021-06-13 19:38:47,739 INFO] iter: 385
+[2021-06-13 19:38:48,111 INFO] iter: 386
+[2021-06-13 19:38:48,460 INFO] iter: 387
+[2021-06-13 19:38:48,679 INFO] iter: 388
+[2021-06-13 19:38:48,927 INFO] iter: 389
+[2021-06-13 19:38:49,217 INFO] iter: 390
+[2021-06-13 19:38:49,963 INFO] iter: 391
+[2021-06-13 19:38:50,745 INFO] iter: 392
+[2021-06-13 19:38:51,036 INFO] iter: 393
+[2021-06-13 19:38:51,388 INFO] iter: 394
+[2021-06-13 19:38:52,145 INFO] iter: 395
+[2021-06-13 19:38:52,450 INFO] iter: 396
+[2021-06-13 19:38:52,668 INFO] iter: 397
+[2021-06-13 19:38:53,560 INFO] iter: 398
+[2021-06-13 19:38:54,130 INFO] iter: 399
+[2021-06-13 19:38:54,940 INFO] Step 400/20000; acc:  79.28; ppl:  2.83; xent: 1.04; lr: 1.00000; 9666/10056 tok/s;    195 sec
+[2021-06-13 19:38:55,052 INFO] iter: 400
+[2021-06-13 19:38:57,607 INFO] iter: 401
+[2021-06-13 19:38:58,058 INFO] iter: 402
+[2021-06-13 19:38:58,681 INFO] iter: 403
+[2021-06-13 19:38:59,482 INFO] iter: 404
+[2021-06-13 19:38:59,842 INFO] iter: 405
+[2021-06-13 19:39:00,283 INFO] iter: 406
+[2021-06-13 19:39:00,428 INFO] iter: 407
+[2021-06-13 19:39:01,045 INFO] iter: 408
+[2021-06-13 19:39:01,959 INFO] iter: 409
+[2021-06-13 19:39:02,414 INFO] iter: 410
+[2021-06-13 19:39:03,155 INFO] iter: 411
+[2021-06-13 19:39:03,446 INFO] iter: 412
+[2021-06-13 19:39:04,329 INFO] iter: 413
+[2021-06-13 19:39:04,939 INFO] iter: 414
+[2021-06-13 19:39:05,225 INFO] iter: 415
+[2021-06-13 19:39:06,137 INFO] iter: 416
+[2021-06-13 19:39:06,389 INFO] iter: 417
+[2021-06-13 19:39:06,671 INFO] iter: 418
+[2021-06-13 19:39:07,009 INFO] iter: 419
+[2021-06-13 19:39:07,495 INFO] iter: 420
+[2021-06-13 19:39:08,113 INFO] iter: 421
+[2021-06-13 19:39:08,513 INFO] iter: 422
+[2021-06-13 19:39:08,876 INFO] iter: 423
+[2021-06-13 19:39:09,305 INFO] iter: 424
+[2021-06-13 19:39:09,529 INFO] iter: 425
+[2021-06-13 19:39:09,785 INFO] iter: 426
+[2021-06-13 19:39:10,033 INFO] iter: 427
+[2021-06-13 19:39:10,648 INFO] iter: 428
+[2021-06-13 19:39:11,770 INFO] iter: 429
+[2021-06-13 19:39:12,109 INFO] iter: 430
+[2021-06-13 19:39:12,444 INFO] iter: 431
+[2021-06-13 19:39:12,841 INFO] iter: 432
+[2021-06-13 19:39:13,338 INFO] iter: 433
+[2021-06-13 19:39:13,526 INFO] iter: 434
+[2021-06-13 19:39:13,978 INFO] iter: 435
+[2021-06-13 19:39:14,314 INFO] iter: 436
+[2021-06-13 19:39:14,593 INFO] iter: 437
+[2021-06-13 19:39:15,450 INFO] iter: 438
+[2021-06-13 19:39:15,923 INFO] iter: 439
+[2021-06-13 19:39:16,210 INFO] iter: 440
+[2021-06-13 19:39:16,547 INFO] iter: 441
+[2021-06-13 19:39:16,690 INFO] iter: 442
+[2021-06-13 19:39:17,415 INFO] iter: 443
+[2021-06-13 19:39:18,158 INFO] iter: 444
+[2021-06-13 19:39:19,240 INFO] iter: 445
+[2021-06-13 19:39:20,040 INFO] iter: 446
+[2021-06-13 19:39:20,378 INFO] iter: 447
+[2021-06-13 19:39:21,899 INFO] iter: 448
+[2021-06-13 19:39:22,108 INFO] iter: 449
+[2021-06-13 19:39:22,299 INFO] Step 450/20000; acc:  79.56; ppl:  2.66; xent: 0.98; lr: 1.00000; 9363/9708 tok/s;    223 sec
+[2021-06-13 19:39:22,322 INFO] iter: 450
+[2021-06-13 19:39:22,555 INFO] iter: 451
+[2021-06-13 19:39:23,179 INFO] iter: 452
+[2021-06-13 19:39:24,208 INFO] iter: 453
+[2021-06-13 19:39:24,622 INFO] iter: 454
+[2021-06-13 19:39:24,893 INFO] iter: 455
+[2021-06-13 19:39:25,623 INFO] iter: 456
+[2021-06-13 19:39:25,842 INFO] iter: 457
+[2021-06-13 19:39:26,001 INFO] iter: 458
+[2021-06-13 19:39:26,221 INFO] iter: 459
+[2021-06-13 19:39:26,573 INFO] iter: 460
+[2021-06-13 19:39:26,789 INFO] iter: 461
+[2021-06-13 19:39:27,058 INFO] iter: 462
+[2021-06-13 19:39:27,284 INFO] iter: 463
+[2021-06-13 19:39:27,614 INFO] iter: 464
+[2021-06-13 19:39:27,971 INFO] iter: 465
+[2021-06-13 19:39:29,466 INFO] iter: 466
+[2021-06-13 19:39:29,683 INFO] iter: 467
+[2021-06-13 19:39:29,912 INFO] iter: 468
+[2021-06-13 19:39:30,279 INFO] iter: 469
+[2021-06-13 19:39:31,066 INFO] iter: 470
+[2021-06-13 19:39:32,084 INFO] iter: 471
+[2021-06-13 19:39:32,833 INFO] iter: 472
+[2021-06-13 19:39:35,275 INFO] iter: 473
+[2021-06-13 19:39:35,820 INFO] iter: 474
+[2021-06-13 19:39:36,039 INFO] iter: 475
+[2021-06-13 19:39:36,247 INFO] iter: 476
+[2021-06-13 19:39:37,024 INFO] iter: 477
+[2021-06-13 19:39:37,197 INFO] iter: 478
+[2021-06-13 19:39:37,657 INFO] iter: 479
+[2021-06-13 19:39:38,140 INFO] iter: 480
+[2021-06-13 19:39:39,619 INFO] iter: 481
+[2021-06-13 19:39:39,937 INFO] iter: 482
+[2021-06-13 19:39:40,111 INFO] iter: 483
+[2021-06-13 19:39:40,509 INFO] iter: 484
+[2021-06-13 19:39:41,373 INFO] iter: 485
+[2021-06-13 19:39:41,604 INFO] iter: 486
+[2021-06-13 19:39:41,797 INFO] iter: 487
+[2021-06-13 19:39:42,539 INFO] iter: 488
+[2021-06-13 19:39:42,789 INFO] iter: 489
+[2021-06-13 19:39:43,725 INFO] iter: 490
+[2021-06-13 19:39:43,992 INFO] iter: 491
+[2021-06-13 19:39:44,294 INFO] iter: 492
+[2021-06-13 19:39:44,501 INFO] iter: 493
+[2021-06-13 19:39:44,724 INFO] iter: 494
+[2021-06-13 19:39:45,093 INFO] iter: 495
+[2021-06-13 19:39:45,354 INFO] iter: 496
+[2021-06-13 19:39:45,558 INFO] iter: 497
+[2021-06-13 19:39:45,902 INFO] iter: 498
+[2021-06-13 19:39:46,237 INFO] iter: 499
+[2021-06-13 19:39:46,417 INFO] Step 500/20000; acc:  80.15; ppl:  3.87; xent: 1.35; lr: 1.00000; 9417/10790 tok/s;    247 sec
+[2021-06-13 19:39:46,431 INFO] iter: 500
+[2021-06-13 19:39:46,622 INFO] iter: 501
+[2021-06-13 19:39:47,088 INFO] iter: 502
+[2021-06-13 19:39:48,194 INFO] iter: 503
+[2021-06-13 19:39:48,703 INFO] iter: 504
+[2021-06-13 19:39:49,039 INFO] iter: 505
+[2021-06-13 19:39:50,160 INFO] iter: 506
+[2021-06-13 19:39:50,561 INFO] iter: 507
+[2021-06-13 19:39:50,952 INFO] iter: 508
+[2021-06-13 19:39:51,085 INFO] iter: 509
+./train.sh: line 16: 1564171 Killed                  python train.py -data $data_path/final -encoder_type brnn -enc_layers 2 -decoder_type rnn -dec_layers 2 -rnn_size 256 -global_attention general -batch_size 32 -word_vec_size 256 -bridge -copy_attn -reuse_copy_attn -train_steps 20000 -gpu_ranks 0 -save_checkpoint_steps 1000 -save_model $data_path/final-model > $data_path/train.final.out
+sequencer-train.sh done
+sequencer-test.sh start
+Starting test data translation
+[2021-06-13 19:41:24,343 INFO] Translating shard 0.
+./translate.sh: line 4: 1741688 Killed                  python translate.py -model $data_path/final-model_step_7000.pt -src $data_path/src-test.txt -beam_size 1 -n_best 1 -output $data_path/pred-test_beam1.txt -dynamic_dict 2>&1 > $data_path/translate1.out
+sequencer-test.sh done
+
+sequencer-train.sh start
+OpenNMT_py environment variable should be set
+Usage: ./sequencer-train.sh
+Depends on environment variable settings
+export OpenNMT_py=.../OpenNMT-py
+export data_path=.../results/Golden  # Or a new directory path as desired
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/bigvul_transfer/final.train*.pt, to avoid overwriting them!
+Starting training
+./train.sh: line 16: 3017598 Killed                  python train.py -train_from $data_path/pretrain.pt -data $data_path/final -encoder_type brnn -enc_layers 2 -decoder_type rnn -dec_layers 2 -rnn_size 256 -global_attention general -batch_size 1 -word_vec_size 256 -bridge -copy_attn -reuse_copy_attn -train_steps 9000 -gpu_ranks 0 -save_checkpoint_steps 50 -save_model $data_path/final-model > $data_path/train.final.out 2> $data_path/train_res.txt
+sequencer-train.sh done
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/bigvul_transfer/final.train*.pt, to avoid overwriting them!
+Starting training
+sequencer-train.sh done
+./train.sh: line 16: 3034790 Killed                  python train.py -train_from $data_path/pretrain.pt -data $data_path/final -encoder_type brnn -enc_layers 2 -decoder_type rnn -dec_layers 2 -rnn_size 256 -global_attention general -batch_size 1 -word_vec_size 256 -bridge -copy_attn -reuse_copy_attn -train_steps 9000 -gpu_ranks 0 -save_checkpoint_steps 50 -save_model $data_path/final-model > $data_path/train.final.out 2> $data_path/train_res.txt
+sequencer-train.sh done
+sequencer-train.sh start
+Starting data preprocessing
+[2021-06-13 23:27:01,203 INFO] Extracting features...
+[2021-06-13 23:27:01,204 INFO]  * number of source features: 0.
+[2021-06-13 23:27:01,204 INFO]  * number of target features: 0.
+[2021-06-13 23:27:01,204 INFO] Building `Fields` object...
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/field.py:150: UserWarning: Field class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/field.py:36: UserWarning: TextMultiField class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/field.py:36: UserWarning: RawField class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+[2021-06-13 23:27:01,204 INFO] Building & saving training data...
+[2021-06-13 23:27:01,204 INFO] Reading source and target files: /root/Sequencer/chai/bigvul_transfer/src-train.txt /root/Sequencer/chai/bigvul_transfer/tgt-train.txt.
+[2021-06-13 23:27:01,248 INFO] Building shard 0.
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/example.py:52: UserWarning: Example class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('Example class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.', UserWarning)
+[2021-06-13 23:27:04,113 INFO]  * saving 0th train data shard to /root/Sequencer/chai/bigvul_transfer/final.train.0.pt.
+[2021-06-13 23:27:08,672 INFO]  * tgt vocab size: 10004.
+[2021-06-13 23:27:08,796 INFO]  * src vocab size: 10002.
+[2021-06-13 23:27:08,796 INFO]  * merging src and tgt vocab...
+[2021-06-13 23:27:09,040 INFO]  * merged vocab size: 10004.
+[2021-06-13 23:27:09,138 INFO] Building & saving validation data...
+[2021-06-13 23:27:09,138 INFO] Reading source and target files: /root/Sequencer/chai/bigvul_transfer/src-val.txt /root/Sequencer/chai/bigvul_transfer/tgt-val.txt.
+[2021-06-13 23:27:09,143 INFO] Building shard 0.
+[2021-06-13 23:27:09,401 INFO]  * saving 0th valid data shard to /root/Sequencer/chai/bigvul_transfer/final.valid.0.pt.
+Starting training
+sequencer-train.sh done
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/bigvul_transfer/final.train*.pt, to avoid overwriting them!
+Starting training
+sequencer-train.sh done
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/bigvul_holdout/final.train*.pt, to avoid overwriting them!
+Starting training
+sequencer-train.sh done
+sequencer-train.sh start
+Starting data preprocessing
+[2021-07-31 23:20:55,720 INFO] Extracting features...
+[2021-07-31 23:20:55,721 INFO]  * number of source features: 0.
+[2021-07-31 23:20:55,721 INFO]  * number of target features: 0.
+[2021-07-31 23:20:55,721 INFO] Building `Fields` object...
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/field.py:150: UserWarning: Field class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/field.py:36: UserWarning: TextMultiField class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/field.py:36: UserWarning: RawField class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('{} class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.'.format(self.__class__.__name__), UserWarning)
+[2021-07-31 23:20:55,721 INFO] Building & saving training data...
+[2021-07-31 23:20:55,722 INFO] Reading source and target files: /root/Sequencer/chai/cwe_final/src-train.txt /root/Sequencer/chai/cwe_final/tgt-train.txt.
+[2021-07-31 23:20:55,729 INFO] Building shard 0.
+/opt/conda/envs/sequencer/lib/python3.8/site-packages/torchtext/data/example.py:52: UserWarning: Example class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.
+  warnings.warn('Example class will be retired soon and moved to torchtext.legacy. Please see the most recent release notes for further information.', UserWarning)
+[2021-07-31 23:20:57,367 INFO]  * saving 0th train data shard to /root/Sequencer/chai/cwe_final/final.train.0.pt.
+[2021-07-31 23:21:00,185 INFO]  * tgt vocab size: 1261.
+[2021-07-31 23:21:00,185 INFO]  * src vocab size: 1118.
+[2021-07-31 23:21:00,185 INFO]  * merging src and tgt vocab...
+[2021-07-31 23:21:00,187 INFO]  * merged vocab size: 1300.
+[2021-07-31 23:21:00,190 INFO] Building & saving validation data...
+[2021-07-31 23:21:00,190 INFO] Reading source and target files: /root/Sequencer/chai/cwe_final/src-val.txt /root/Sequencer/chai/cwe_final/tgt-val.txt.
+[2021-07-31 23:21:00,191 INFO] Building shard 0.
+[2021-07-31 23:21:00,342 INFO]  * saving 0th valid data shard to /root/Sequencer/chai/cwe_final/final.valid.0.pt.
+Starting training
+sequencer-train.sh done
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/BigVul_transfer/final.train*.pt, to avoid overwriting them!
+Starting training
+./train.sh: line 16: 2023204 Killed                  python train.py -data $data_path/final -encoder_type brnn -enc_layers 2 -decoder_type rnn -dec_layers 2 -rnn_size 256 -global_attention general -batch_size 32 -word_vec_size 256 -bridge -copy_attn -reuse_copy_attn -train_steps 20000 -gpu_ranks 0 -save_checkpoint_steps 1000 -save_model $data_path/final-model > $data_path/train.final.out 2> $data_path/train.final.err
+sequencer-train.sh done
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/BigVul_transfer/final.train*.pt, to avoid overwriting them!
+Starting training
+sequencer-train.sh done
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/BigVul_transfer/final.train*.pt, to avoid overwriting them!
+Starting training
+./train.sh: line 16: 2069353 Killed                  python train.py -train_from $data_path/final-model_step_5000.pt -data $data_path/final -encoder_type brnn -enc_layers 2 -decoder_type rnn -dec_layers 2 -rnn_size 256 -global_attention general -batch_size 1 -word_vec_size 256 -bridge -copy_attn -reuse_copy_attn -train_steps 20000 -gpu_ranks 0 -save_checkpoint_steps 1000 -save_model $data_path/final-model > $data_path/train.final.out 2> $data_path/train.final.err
+sequencer-train.sh done
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/BigVul_transfer/final.train*.pt, to avoid overwriting them!
+Starting training
+./train.sh: line 16: 2072787 Killed                  python train.py -train_from $data_path/final-model_step_2000.pt -data $data_path/final -encoder_type brnn -enc_layers 2 -decoder_type rnn -dec_layers 2 -rnn_size 256 -global_attention general -batch_size 1 -word_vec_size 256 -bridge -copy_attn -reuse_copy_attn -train_steps 20000 -gpu_ranks 0 -save_checkpoint_steps 1000 -save_model $data_path/final-model > $data_path/train.final.out 2> $data_path/train.final.err
+sequencer-train.sh done
+sequencer-train.sh start
+Starting data preprocessing
+Please backup existing pt files: /root/Sequencer/chai/BigVul_transfer/final.train*.pt, to avoid overwriting them!
+Starting training
+./train.sh: line 16: 2075288 Killed                  python train.py -train_from $data_path/final-model_step_2000.pt -data $data_path/final -encoder_type brnn -enc_layers 2 -decoder_type rnn -dec_layers 2 -rnn_size 256 -global_attention general -batch_size 1 -word_vec_size 256 -bridge -copy_attn -reuse_copy_attn -train_steps 20000 -gpu_ranks 0 -save_checkpoint_steps 100 -save_model $data_path/final-model > $data_path/train.final.out 2> $data_path/train.final.err
+sequencer-train.sh done

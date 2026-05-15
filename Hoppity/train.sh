@@ -1,0 +1,1 @@
+python ./gtrans/training/main_gtrans.py -data_root ./gtrans/real_world_final_processed -data_name real_world_final -save_dir ./real_world_final_save -gnn_type "s2v_multi" -max_lv 4 -resampling True -comp_method "mlp" -batch_size 6

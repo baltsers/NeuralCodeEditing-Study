@@ -1,0 +1,9 @@
+(base) root@4dd4d0b94873:~/cwe_new/incremental_tree_edit# python edit_components/vocab.py source_data/githubedits/real_world_all_final.jsonl tmp.json
+WARNING: unknown dataset type
+reading all lines from the dataset
+7789 lines. Done
+Parallel data loading...
+loading dataset: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 7789/7789 [00:00<00:00, 2079928.30it/s]
+number of word types: 156985, number of word types w/ frequency >= 2: 154775
+top 10 words: ;, (, ), ,, ->, =, if, {, }, *
+built vocabulary Vocabulary[size=10000]
