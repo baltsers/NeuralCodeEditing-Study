@@ -13,7 +13,7 @@
 
 ## Contents
 
-The artifact contains 774 file(s) including Python, Java, C/C++, JavaScript/TS, Shell scripts, Config files, Data files, and Documentation.
+The artifact contains 775 file(s) including Python, Java, C/C++, JavaScript/TS, Shell scripts, Config files, Data files, and Documentation.
 
 ```
 ├── Detectors
@@ -77,7 +77,7 @@ The artifact contains 774 file(s) including Python, Java, C/C++, JavaScript/TS, 
 │       ├── devign_reveal_aug_api_test.py
 │       ├── devign_reveal_gth.txt
 │       … (35 more items)
-… (902 more items)
+… (903 more items)
 ```
 
 ---
